@@ -23,6 +23,7 @@ namespace AdMaker
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new GlobalViewModel(this);
         }
     }
 }

@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMaker"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="AdMaker" Height="488" Width="800">
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Left" Height="447" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
+            <Label Content="Новое объявление"/>
+            <Label Content="Название"/>
+            <TextBox Height="98" TextWrapping="Wrap"
+                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Объявление"/>
+            <TextBox Height="104" TextWrapping="Wrap" 
+                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="путь к картинкам"/>
+                <Button Content="Обзор"
+                    Command="{Binding UniversalCommand}" CommandParameter="AddAdd" Margin="3" Width="48"/>
+            </StackPanel>
+            <Label Content="{Binding PathToFolderWithImages}"/>
+            <Label Content="Цена"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="мин."/>
+                <TextBox Height="27" TextWrapping="Wrap" Width="100"/>
+                <Label Content="макс."/>
+                <TextBox Height="27" TextWrapping="Wrap" Width="100" />
+            </StackPanel>
+            <Button Content="Добавить"
+                    Command="{Binding UniversalCommand}" CommandParameter="AddAdd" Margin="20"/>
+        </StackPanel>
+
     </Grid>
 </Window>
