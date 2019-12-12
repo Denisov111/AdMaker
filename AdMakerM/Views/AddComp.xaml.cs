@@ -12,22 +12,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace AdMaker
+namespace AdMakerM
 {
     /// <summary>
-    /// Логика взаимодействия для VideoCards.xaml
+    /// Логика взаимодействия для AddComp.xaml
     /// </summary>
-    public partial class VideoCards : Window
+    public partial class AddComp : Window
     {
-        public VideoCards()
+        Global global;
+
+        public AddComp(Global global)
         {
             InitializeComponent();
-            DataContext = Global;
+            this.global = global;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Views.VideoCards f = new Views.VideoCards(global);
+            f.ShowDialog();
         }
     }
 }

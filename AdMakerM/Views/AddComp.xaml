@@ -1,0 +1,43 @@
+﻿<Window x:Class="AdMakerM.AddComp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdMakerM"
+        mc:Ignorable="d"
+        Title="AddComp" Height="540.896" Width="800">
+    <Grid>
+        <StackPanel HorizontalAlignment="Left" Height="447" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
+            <Label Content="Новое объявление"/>
+            <Label Content="Название"/>
+            <TextBox Height="43" TextWrapping="Wrap"
+                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Объявление"/>
+            <TextBox Height="104" TextWrapping="Wrap" 
+                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Height="87">
+                <Label Content="опции"/>
+
+                <CheckBox Content="CheckBox"/>
+                <Button Content="видеокарты" 
+                        Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards" Margin="20" Click="Button_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="путь к фото"/>
+                <Button Content="Обзор"
+                    Command="{Binding UniversalCommand}" CommandParameter="AddAdd" Margin="3" Width="48"/>
+            </StackPanel>
+            <Label Content="{Binding PathToFolderWithImages}"/>
+
+            <StackPanel Orientation="Horizontal">
+                <!--<Label Content="мин."/>
+                <TextBox Height="27" TextWrapping="Wrap" Width="100"/>
+                <Label Content="макс."/>-->
+                <Label Content="Цена без опций"/>
+                <TextBox Height="27" TextWrapping="Wrap" Width="100" />
+            </StackPanel>
+            <Button Content="Добавить"
+                    Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20"/>
+        </StackPanel>
+    </Grid>
+</Window>

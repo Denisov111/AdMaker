@@ -10,24 +10,27 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AdMaker
+namespace AdMakerM
 {
     /// <summary>
-    /// Логика взаимодействия для VideoCards.xaml
+    /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class VideoCards : Window
+    public partial class MainWindow : Window
     {
-        public VideoCards()
+        Global global;
+        public MainWindow()
         {
             InitializeComponent();
-            DataContext = Global;
+            global = new Global();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            AddComp f = new AddComp(global);
+            f.Show();
         }
     }
 }
