@@ -1,0 +1,38 @@
+﻿<Window x:Class="AdMaker.VideoCards"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdMaker"
+        mc:Ignorable="d"
+        Title="VideoCards" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="0*"/>
+            <RowDefinition Height="396*"/>
+        </Grid.RowDefinitions>
+        <DataGrid HorizontalAlignment="Left" Height="161" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" RenderTransformOrigin="0.5,0.5" Grid.Row="2"/>
+        
+        <StackPanel HorizontalAlignment="Left" Height="145" Margin="10,182,0,0" Grid.Row="2" VerticalAlignment="Top" Width="413">
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Название" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap"  Width="117"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Память" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap" Width="117"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="TDP" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap" Width="117"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Цена" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap" Width="117"/>
+            </StackPanel>
+            <Button Content="Добавить карту" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

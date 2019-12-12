@@ -5,32 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMaker"
         mc:Ignorable="d"
-        Title="AdMaker" Height="488" Width="800">
+        Title="AdMaker" Height="524" Width="800">
     <Grid>
         <StackPanel HorizontalAlignment="Left" Height="447" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
             <Label Content="Новое объявление"/>
             <Label Content="Название"/>
-            <TextBox Height="98" TextWrapping="Wrap"
+            <TextBox Height="50" TextWrapping="Wrap"
                      Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Объявление"/>
             <TextBox Height="104" TextWrapping="Wrap" 
                      Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Height="77">
+                <Label Content="опции"/>
+                
+                <CheckBox Content="CheckBox"/>
+                <Button Content="видеокарты" Click="Button_Click"/>
+            </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <Label Content="путь к картинкам"/>
+                <Label Content="путь к фото"/>
                 <Button Content="Обзор"
                     Command="{Binding UniversalCommand}" CommandParameter="AddAdd" Margin="3" Width="48"/>
             </StackPanel>
             <Label Content="{Binding PathToFolderWithImages}"/>
-            <Label Content="Цена"/>
+            
             <StackPanel Orientation="Horizontal">
-                <Label Content="мин."/>
+                <!--<Label Content="мин."/>
                 <TextBox Height="27" TextWrapping="Wrap" Width="100"/>
-                <Label Content="макс."/>
+                <Label Content="макс."/>-->
+                <Label Content="Цена без опций"/>
                 <TextBox Height="27" TextWrapping="Wrap" Width="100" />
             </StackPanel>
             <Button Content="Добавить"
                     Command="{Binding UniversalCommand}" CommandParameter="AddAdd" Margin="20"/>
         </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="141" Margin="324,53,0,0" VerticalAlignment="Top" Width="321"/>
 
     </Grid>
 </Window>
