@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMaker", "AdMaker\AdMaker.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMakerM", "AdMakerM\AdMakerM.csproj", "{031F0D59-93A4-4177-91D4-E5B7AD5E4FEA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForDel", "ForDel\ForDel.csproj", "{66555630-B3A5-4ADA-9BDC-B6CBE0D6E92B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{031F0D59-93A4-4177-91D4-E5B7AD5E4FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{031F0D59-93A4-4177-91D4-E5B7AD5E4FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{031F0D59-93A4-4177-91D4-E5B7AD5E4FEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66555630-B3A5-4ADA-9BDC-B6CBE0D6E92B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66555630-B3A5-4ADA-9BDC-B6CBE0D6E92B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66555630-B3A5-4ADA-9BDC-B6CBE0D6E92B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66555630-B3A5-4ADA-9BDC-B6CBE0D6E92B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
