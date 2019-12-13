@@ -21,6 +21,12 @@ namespace AdMakerM
     {
         Global global;
 
+        public string AdTitle { get; set; } = "Игровой ПК ";
+        public string AdDesc { get; set; } = "Игровой ПК ";
+        public int Memory { get; set; } = 1024;
+        public int TDP { get; set; } = 120;
+        public decimal Price { get; set; } = 5990;
+
         public AddComp(Global global)
         {
             InitializeComponent();
@@ -31,6 +37,11 @@ namespace AdMakerM
         {
             Views.VideoCards f = new Views.VideoCards(global);
             f.ShowDialog();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

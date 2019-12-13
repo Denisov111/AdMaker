@@ -37,7 +37,7 @@
                 <TextBox Height="27" TextWrapping="Wrap" Width="100" />
             </StackPanel>
             <Button Content="Добавить"
-                    Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20"/>
+                    Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20" Click="Button_Click_1"/>
         </StackPanel>
     </Grid>
 </Window>

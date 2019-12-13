@@ -55,7 +55,54 @@ namespace AdMakerM.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            CardTitle = "Geforce ";
+            cardTitleTextBox.Text=CardTitle = "Geforce ";
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            cardTitleTextBox.Text = CardTitle = "Radeon ";
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            memoryTextBox.Text = text;
+            Memory = Int32.Parse(text);
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            memoryTextBox.Text = text;
+            Memory = Int32.Parse(text);
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            memoryTextBox.Text = text;
+            Memory = Int32.Parse(text);
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            memoryTextBox.Text = text;
+            Memory = Int32.Parse(text);
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            memoryTextBox.Text = text;
+            Memory = Int32.Parse(text);
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            memoryTextBox.Text = text;
+            Memory = Int32.Parse(text);
         }
     }
 }
