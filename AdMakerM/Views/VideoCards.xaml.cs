@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace AdMakerM.Views
 {
@@ -25,6 +26,7 @@ namespace AdMakerM.Views
         public int Memory { get; set; } = 1024;
         public int TDP { get; set; } = 120;
         public decimal Price { get; set; } = 5990;
+        public ObservableCollection<VideoAdapter> SelectedVideo { get; set; } = new ObservableCollection<VideoAdapter>();
 
         public VideoCards(Global global)
         {
@@ -103,6 +105,17 @@ namespace AdMakerM.Views
             var text = ((Button)(FrameworkElement)sender).Content.ToString();
             memoryTextBox.Text = text;
             Memory = Int32.Parse(text);
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            foreach(var va in videoAdaptersDataGrid.SelectedItems)
+            {
+                Console.WriteLine(va);
+                VideoAdapter adapter = ((VideoAdapter)va).Clone();
+                SelectedVideo.Add(adapter);
+            }
+            Close();
         }
     }
 }

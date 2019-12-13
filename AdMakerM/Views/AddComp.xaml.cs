@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace AdMakerM
 {
@@ -23,25 +24,37 @@ namespace AdMakerM
 
         public string AdTitle { get; set; } = "Игровой ПК ";
         public string AdDesc { get; set; } = "Игровой ПК ";
-        public int Memory { get; set; } = 1024;
-        public int TDP { get; set; } = 120;
-        public decimal Price { get; set; } = 5990;
+        public ObservableCollection<VideoAdapter> VideoAdaptersColl { get; set; } = new ObservableCollection<VideoAdapter>();
+        public int Memory { get; set; } = 0;
+        public int TDP { get; set; } = 0;
+        public decimal Price { get; set; } = 0;
 
         public AddComp(Global global)
         {
             InitializeComponent();
             this.global = global;
+            DataContext = this;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Views.VideoCards f = new Views.VideoCards(global);
             f.ShowDialog();
+            VideoAdaptersColl=f.SelectedVideo;
+            videoAdaptersDataGrid.ItemsSource=null;
+            videoAdaptersDataGrid.ItemsSource = VideoAdaptersColl;
+            videoAdaptersDataGrid.Items.Refresh();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void AddCompButton_Click(object sender, RoutedEventArgs e)
         {
+            Computer comp = new Computer()
+            {
+                Title = AdTitle,
+                Descriptrion = AdDesc,
+                Price= Price,
 
+            };
         }
     }
 }

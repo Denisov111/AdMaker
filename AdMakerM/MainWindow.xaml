@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Добавить компьютер" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="133" Click="Button_Click"/>
+        <DataGrid HorizontalAlignment="Left" Height="399" Margin="148,10,0,0" VerticalAlignment="Top" Width="634"/>
 
     </Grid>
 </Window>

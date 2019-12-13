@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         Title="VideoCards" Height="450" Width="800">
     <Grid>
-        <DataGrid HorizontalAlignment="Left" Height="161" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" 
+        <DataGrid x:Name="videoAdaptersDataGrid"
+                  HorizontalAlignment="Left" Height="161" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" 
                   ItemsSource="{Binding VideoAdapters}">
 
         </DataGrid>
 
-        <StackPanel HorizontalAlignment="Left" Height="145" Margin="10,182,0,0" VerticalAlignment="Top" Width="513">
+        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,182,0,0" VerticalAlignment="Top" Width="513">
             <StackPanel  Orientation="Horizontal">
                 <Label Content="Название" Width="117"/>
                 <TextBox x:Name="cardTitleTextBox" Height="22" TextWrapping="Wrap"  Width="117" Text="{Binding Local.CardTitle}"/>
@@ -38,7 +39,8 @@
                 <Label Content="Цена" Width="117"/>
                 <TextBox Height="22" TextWrapping="Wrap" Width="117" Text="{Binding Local.Price}"/>
             </StackPanel>
-            <Button Content="Добавить карту" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Click="Button_Click"/>
+            <Button Content="Добавить карту на склад" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
+            <Button Content="Добавить карту в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_9"/>
         </StackPanel>
 
     </Grid>

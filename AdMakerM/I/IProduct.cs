@@ -6,8 +6,21 @@ using System.Threading.Tasks;
 
 namespace AdMakerM
 {
-    interface IProduct
+    public enum ProductType
     {
+        Computer,
+        HDD,
+        Memory,
+        Monitor,
+        PowerSupply,
+        Processor,
+        SSD,
+        VideoAdapter
+    }
+
+    public interface IProduct
+    {
+        ProductType ProductType { get; }
         string Title { get; set; }
         string Descriptrion { get; set; }
         decimal Price { get; set; }

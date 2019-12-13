@@ -15,7 +15,8 @@ namespace AdMakerM
 
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; } = new ObservableCollection<VideoAdapter>();
 
-        public ObservableCollection<VideoAdapter> ads { get; set; } = new ObservableCollection<VideoAdapter>();
+        //public ObservableCollection<VideoAdapter> ads { get; set; } = new ObservableCollection<VideoAdapter>();
+        public ObservableCollection<IProduct> Products { get; set; } = new ObservableCollection<IProduct>();
 
         public Global()
         {

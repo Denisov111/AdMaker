@@ -6,22 +6,22 @@ using System.Threading.Tasks;
 
 namespace AdMakerM
 {
-    public enum ProductType
-    {
-        Computer,
-        VideoAdapter,
-        Memory,
-        HDD,
-        SSD,
-        Processor,
-        Monitor,
-        PowerSupply
-    }
+    //public enum ProductType
+    //{
+    //    Computer,
+    //    VideoAdapter,
+    //    Memory,
+    //    HDD,
+    //    SSD,
+    //    Processor,
+    //    Monitor,
+    //    PowerSupply
+    //}
 
-    class Product
-    {
-        public ProductType ProductType { get; set; }
-        public IProduct ProductObject { get; set; }
+    //class Product
+    //{
+    //    public ProductType ProductType { get; set; }
+    //    public IProduct ProductObject { get; set; }
         
-    }
+    //}
 }

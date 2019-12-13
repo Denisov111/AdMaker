@@ -8,6 +8,7 @@ namespace AdMakerM
 {
     public class VideoAdapter : IProduct
     {
+        public ProductType ProductType { get => ProductType.Computer; }
         public string Title { get; set; }
         public string Descriptrion { get; set; }
         public decimal Price { get; set; }
@@ -16,5 +17,25 @@ namespace AdMakerM
         public string ImgFilePath { get; set; }
         public int Memory { get; set; }
         public int TDP { get; set; }
+
+        public override string ToString()
+        {
+            return Title;
+        }
+
+        public VideoAdapter Clone()
+        {
+            return new VideoAdapter()
+            {
+                Title = Title,
+                Descriptrion = Descriptrion,
+                Price = Price,
+                ImgFileName = ImgFileName,
+                ImgFileDir = ImgFileDir,
+                ImgFilePath = ImgFilePath,
+                Memory = Memory,
+                TDP = TDP
+            };
+        }
     }
 }

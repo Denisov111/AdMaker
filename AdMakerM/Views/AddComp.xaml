@@ -10,11 +10,15 @@
         <StackPanel HorizontalAlignment="Left" Height="447" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
             <Label Content="Новое объявление"/>
             <Label Content="Название"/>
+            <!--<TextBox Height="43" TextWrapping="Wrap"
+                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox Height="43" TextWrapping="Wrap"
-                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding AdTitle}"/>
             <Label Content="Объявление"/>
+            <!--<TextBox Height="104" TextWrapping="Wrap" 
+                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox Height="104" TextWrapping="Wrap" 
-                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding AdDesc}"/>
             <StackPanel Height="87">
                 <Label Content="опции"/>
 
@@ -37,7 +41,11 @@
                 <TextBox Height="27" TextWrapping="Wrap" Width="100" />
             </StackPanel>
             <Button Content="Добавить"
-                    Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20" Click="Button_Click_1"/>
+                    x:Name="addCompButton"
+                    Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20" Click="AddCompButton_Click"/>
         </StackPanel>
+        <DataGrid ItemsSource="{Binding VideoAdaptersColl}"
+                  x:Name="videoAdaptersDataGrid"
+            HorizontalAlignment="Left" Height="252" Margin="334,10,0,0" VerticalAlignment="Top" Width="448"/>
     </Grid>
 </Window>
