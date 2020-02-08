@@ -9,6 +9,7 @@ namespace AdMakerM
     public class VideoAdapter : IProduct
     {
         public ProductType ProductType { get => ProductType.VideoAdapter; }
+        public string Guid { get; set; }
         public string Title { get; set; }
         public string Descriptrion { get; set; }
         public decimal Price { get; set; }

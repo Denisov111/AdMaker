@@ -57,7 +57,8 @@ namespace AdMakerM.Views
                 Title = MemoryTitle,
                 Volume = volume,
                 MemoryType = memoryType,
-                Price = Price
+                Price = Price,
+                Guid = Guid.NewGuid().ToString()
             };
             Console.WriteLine(mem);
             global.MemoryOptions.Add(mem);
@@ -65,7 +66,13 @@ namespace AdMakerM.Views
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            foreach (var mem in memoryDataGrid.SelectedItems)
+            {
+                Console.WriteLine(mem);
+                Memory adapter = ((Memory)mem).Clone();
+                SelectedMemory.Add(adapter);
+            }
+            Close();
         }
     }
 }

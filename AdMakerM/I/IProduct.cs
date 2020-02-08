@@ -21,6 +21,7 @@ namespace AdMakerM
     public interface IProduct
     {
         ProductType ProductType { get; }
+        string Guid { get; }
         string Title { get; set; }
         string Descriptrion { get; set; }
         decimal Price { get; set; }

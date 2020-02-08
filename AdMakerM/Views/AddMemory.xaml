@@ -9,7 +9,14 @@
     <Grid>
         <DataGrid x:Name="memoryDataGrid"
                   HorizontalAlignment="Left" Height="562" Margin="10,0,0,0" VerticalAlignment="Top" Width="1172" 
-                  ItemsSource="{Binding MemoryOptions}">
+                  ItemsSource="{Binding MemoryOptions}"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="MemoryType" Binding="{Binding MemoryType}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
+            </DataGrid.Columns>
 
         </DataGrid>
 

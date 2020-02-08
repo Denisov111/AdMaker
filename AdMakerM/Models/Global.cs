@@ -49,7 +49,8 @@ namespace AdMakerM
                                 new XElement("title", va.Title),
                                 new XElement("memory", va.Memory),
                                 new XElement("tdp", va.TDP),
-                                new XElement("price", va.Price));
+                                new XElement("price", va.Price),
+                                new XElement("guid", va.Guid));
                 video.Add(vidAd);
                 
             }
@@ -61,7 +62,8 @@ namespace AdMakerM
                                 new XElement("title", mo.Title),
                                 new XElement("volume", mo.Volume),
                                 new XElement("memory_type", mo.MemoryType),
-                                new XElement("price", mo.Price));
+                                new XElement("price", mo.Price),
+                                new XElement("guid", mo.Guid));
                 memoryOptions.Add(memoryOptEl);
 
             }
@@ -85,13 +87,15 @@ namespace AdMakerM
                     int memory = Int32.Parse(el.Element("memory").Value);
                     int tdp = Int32.Parse( el.Element("tdp").Value);
                     decimal price = (decimal)Double.Parse( el.Element("price").Value);
+                    string guid = (el.Element("guid")==null)?"":el.Element("guid").Value;
 
                     VideoAdapter va = new VideoAdapter()
                     {
                         Title = title,
                         Memory = memory,
                         TDP = tdp,
-                        Price = price
+                        Price = price,
+                        Guid= guid
                     };
                     VideoAdapters.Add(va);
                 }
@@ -102,6 +106,7 @@ namespace AdMakerM
                     int volume = Int32.Parse(el.Element("volume").Value);
                     string memoryType = el.Element("memory_type").Value;
                     decimal price = (decimal)Double.Parse(el.Element("price").Value);
+                    string guid = (el.Element("guid") == null) ? "" : el.Element("guid").Value;
 
                     MemoryType mt = 0;
 
@@ -117,7 +122,8 @@ namespace AdMakerM
                         Title = title,
                         Volume = volume,
                         MemoryType = mt,
-                        Price = price
+                        Price = price,
+                        Guid = guid
                     };
                     MemoryOptions.Add(memory);
                 }

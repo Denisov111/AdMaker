@@ -9,7 +9,14 @@
     <Grid>
         <DataGrid x:Name="videoAdaptersDataGrid"
                   HorizontalAlignment="Left" Height="161" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" 
-                  ItemsSource="{Binding VideoAdapters}">
+                  ItemsSource="{Binding VideoAdapters}"
+                  AutoGenerateColumns="False" CanUserAddRows="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Memory" Binding="{Binding Memory}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="TDP" Binding="{Binding TDP}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
+            </DataGrid.Columns>
 
         </DataGrid>
 
@@ -25,11 +32,12 @@
                 <TextBox x:Name="memoryTextBox"
                          Height="22" TextWrapping="Wrap" Width="117" Text="{Binding Local.Memory}"/>
                 <Button Content="512" Width="35" Click="Button_Click_3"/>
-                <Button Content="1024" Width="35" Click="Button_Click_4"/>
-                <Button Content="2048" Width="35" Click="Button_Click_5"/>
-                <Button Content="3072" Width="35" Click="Button_Click_6"/>
-                <Button Content="4096" Width="35" Click="Button_Click_7"/>
-                <Button Content="6144" Width="35" Click="Button_Click_8"/>
+                <Button Content="1024" Width="35" Click="Button_Click_3"/>
+                <Button Content="2048" Width="35" Click="Button_Click_3"/>
+                <Button Content="3072" Width="35" Click="Button_Click_3"/>
+                <Button Content="4096" Width="35" Click="Button_Click_3"/>
+                <Button Content="6144" Width="35" Click="Button_Click_3"/>
+                <Button Content="8192" Width="35" Click="Button_Click_3"/>
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <Label Content="TDP" Width="117"/>

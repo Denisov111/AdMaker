@@ -15,5 +15,7 @@ namespace AdMakerM
         public string ImgFileName { get; set; }
         public string ImgFileDir { get; set; }
         public string ImgFilePath { get; set; }
+
+        public string Guid => throw new NotImplementedException();
     }
 }

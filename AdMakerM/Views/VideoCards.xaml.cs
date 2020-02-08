@@ -47,7 +47,8 @@ namespace AdMakerM.Views
                 Title = CardTitle,
                 Memory = Memory,
                 TDP=TDP,
-                Price=Price
+                Price=Price,
+                Guid = Guid.NewGuid().ToString()
             };
             Console.WriteLine(va);
             global.VideoAdapters.Add(va);
@@ -72,41 +73,6 @@ namespace AdMakerM.Views
             Memory = Int32.Parse(text);
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            var text = ((Button)(FrameworkElement)sender).Content.ToString();
-            memoryTextBox.Text = text;
-            Memory = Int32.Parse(text);
-        }
-
-        private void Button_Click_5(object sender, RoutedEventArgs e)
-        {
-            var text = ((Button)(FrameworkElement)sender).Content.ToString();
-            memoryTextBox.Text = text;
-            Memory = Int32.Parse(text);
-        }
-
-        private void Button_Click_6(object sender, RoutedEventArgs e)
-        {
-            var text = ((Button)(FrameworkElement)sender).Content.ToString();
-            memoryTextBox.Text = text;
-            Memory = Int32.Parse(text);
-        }
-
-        private void Button_Click_7(object sender, RoutedEventArgs e)
-        {
-            var text = ((Button)(FrameworkElement)sender).Content.ToString();
-            memoryTextBox.Text = text;
-            Memory = Int32.Parse(text);
-        }
-
-        private void Button_Click_8(object sender, RoutedEventArgs e)
-        {
-            var text = ((Button)(FrameworkElement)sender).Content.ToString();
-            memoryTextBox.Text = text;
-            Memory = Int32.Parse(text);
-        }
-
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
             foreach(var va in videoAdaptersDataGrid.SelectedItems)
@@ -117,5 +83,6 @@ namespace AdMakerM.Views
             }
             Close();
         }
+
     }
 }

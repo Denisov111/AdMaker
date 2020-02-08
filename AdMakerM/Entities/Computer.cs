@@ -22,6 +22,7 @@ namespace AdMakerM
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; }
         public ObservableCollection<HDD> HDDs { get; set; }
         public ObservableCollection<SSD> SSDs { get; set; }
-        
+
+        public string Guid => throw new NotImplementedException();
     }
 }
