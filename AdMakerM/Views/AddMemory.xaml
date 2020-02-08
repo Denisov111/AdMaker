@@ -1,0 +1,56 @@
+﻿<Window x:Class="AdMakerM.Views.AddMemory"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdMakerM.Views"
+        mc:Ignorable="d"
+        Title="AddMemory" Height="800" Width="1200">
+    <Grid>
+        <DataGrid x:Name="memoryDataGrid"
+                  HorizontalAlignment="Left" Height="562" Margin="10,0,0,0" VerticalAlignment="Top" Width="1172" 
+                  ItemsSource="{Binding MemoryOptions}">
+
+        </DataGrid>
+
+        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,580,0,0" VerticalAlignment="Top" Width="513">
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Название" Width="117"/>
+                <TextBox x:Name="cardTitleTextBox" Height="22" TextWrapping="Wrap"  Width="117" Text="{Binding Local.MemoryTitle}"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Объём" Width="117"/>
+                <ComboBox x:Name="memoryVolComboBox"
+                          SelectedValuePath="Content"
+                          Width="120" SelectedIndex="0">
+                    <ComboBoxItem Content="1" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="2" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="3" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="4" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="6" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="8" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="12" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="16" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="32" HorizontalAlignment="Left" Width="118"/>
+                </ComboBox>
+
+
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Тип" Width="117"/>
+                <ComboBox x:Name="memoryTypeComboBox" Width="120" SelectedIndex="1">
+                    <ComboBoxItem Content="DDR2" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="DDR3" HorizontalAlignment="Left" Width="118"/>
+                    <ComboBoxItem Content="DDR4" HorizontalAlignment="Left" Width="118"/>
+                </ComboBox>
+
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Цена" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap" Width="117" Text="{Binding Local.Price}"/>
+            </StackPanel>
+            <Button Content="Добавить память на склад" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
+            <Button Content="Добавить память в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_1" />
+        </StackPanel>
+    </Grid>
+</Window>

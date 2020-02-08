@@ -14,6 +14,7 @@ namespace AdMakerM
         string storeFile = @"store.xml";
 
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; } = new ObservableCollection<VideoAdapter>();
+        public ObservableCollection<Memory> MemoryOptions { get; set; } = new ObservableCollection<Memory>();
 
         //public ObservableCollection<VideoAdapter> ads { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<IProduct> Products { get; set; } = new ObservableCollection<IProduct>();
@@ -22,6 +23,7 @@ namespace AdMakerM
         {
             InitStore();
             VideoAdapters.CollectionChanged += VideoAdapters_CollectionChanged;
+            MemoryOptions.CollectionChanged += VideoAdapters_CollectionChanged;
         }
 
         private void VideoAdapters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -37,7 +39,8 @@ namespace AdMakerM
             XDocument doc = new XDocument();
             XElement st = new XElement("store");
             XElement video = new XElement("videoadapters");
-            
+            XElement memoryOptions = new XElement("memory_options");
+
             doc.Add(st);
 
             foreach (VideoAdapter va in VideoAdapters)
@@ -51,6 +54,19 @@ namespace AdMakerM
                 
             }
             doc.Root.Add(video);
+
+            foreach (Memory mo in MemoryOptions)
+            {
+                XElement memoryOptEl = new XElement("memory_options",
+                                new XElement("title", mo.Title),
+                                new XElement("volume", mo.Volume),
+                                new XElement("memory_type", mo.MemoryType),
+                                new XElement("price", mo.Price));
+                memoryOptions.Add(memoryOptEl);
+
+            }
+            doc.Root.Add(memoryOptions);
+
             doc.Save(storeFile);
         }
 
@@ -78,6 +94,32 @@ namespace AdMakerM
                         Price = price
                     };
                     VideoAdapters.Add(va);
+                }
+
+                foreach (XElement el in doc.Root.Element("memory_options").Elements())
+                {
+                    string title = el.Element("title").Value;
+                    int volume = Int32.Parse(el.Element("volume").Value);
+                    string memoryType = el.Element("memory_type").Value;
+                    decimal price = (decimal)Double.Parse(el.Element("price").Value);
+
+                    MemoryType mt = 0;
+
+                    if (memoryType == MemoryType.DDR2.ToString())
+                        mt = MemoryType.DDR2;
+                    if (memoryType == MemoryType.DDR3.ToString())
+                        mt = MemoryType.DDR3;
+                    if (memoryType == MemoryType.DDR4.ToString())
+                        mt = MemoryType.DDR4;
+
+                    Memory memory = new Memory()
+                    {
+                        Title = title,
+                        Volume = volume,
+                        MemoryType = mt,
+                        Price = price
+                    };
+                    MemoryOptions.Add(memory);
                 }
             }
             catch (Exception ex)

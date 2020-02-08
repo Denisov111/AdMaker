@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AddComp" Height="540.896" Width="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="447" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
+        <StackPanel HorizontalAlignment="Left" Height="490" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
             <Label Content="Новое объявление"/>
             <Label Content="Название"/>
             <!--<TextBox Height="43" TextWrapping="Wrap"
@@ -19,12 +19,33 @@
                      Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox Height="104" TextWrapping="Wrap" 
                      Text="{Binding AdDesc}"/>
-            <StackPanel Height="87">
-                <Label Content="опции"/>
+            <StackPanel Height="150">
+                <Label Content="опции сборки"/>
+                <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
+                    <CheckBox x:Name="addCardToOptionCheckBox" VerticalAlignment="Center"/>
+                    <Button Content="Видеокарты" 
+                        Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards"
+                           Margin="20,0,0,0" Width="150" Click="Button_Click"/>
+                </StackPanel>
+                <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
+                    <CheckBox x:Name="addMemoryToOptionCheckBox" VerticalAlignment="Center"/>
+                    <Button Content="Оперативка" 
+                        Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards"
+                           Margin="20,0,0,0" Width="150" Click="Button_Click_1" />
+                </StackPanel>
+                <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
+                    <CheckBox x:Name="addSSDToOptionCheckBox" VerticalAlignment="Center"/>
+                    <Button Content="SSD" 
+                        Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards"
+                           Margin="20,0,0,0" Width="150" />
+                </StackPanel>
+                <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
+                    <CheckBox x:Name="addHDDToOptionCheckBox" VerticalAlignment="Center"/>
+                    <Button Content="HDD" 
+                        Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards"
+                           Margin="20,0,0,0" Width="150" />
+                </StackPanel>
 
-                <CheckBox Content="CheckBox"/>
-                <Button Content="видеокарты" 
-                        Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards" Margin="20" Click="Button_Click"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="путь к фото"/>
@@ -46,6 +67,9 @@
         </StackPanel>
         <DataGrid ItemsSource="{Binding VideoAdaptersColl}"
                   x:Name="videoAdaptersDataGrid"
-            HorizontalAlignment="Left" Height="252" Margin="334,10,0,0" VerticalAlignment="Top" Width="448"/>
+            HorizontalAlignment="Left" Height="188" Margin="334,10,0,0" VerticalAlignment="Top" Width="448"/>
+        <DataGrid ItemsSource="{Binding MemoryOptionsColl}"
+                  x:Name="memoryOptionsDataGrid"
+                  HorizontalAlignment="Left" Height="177" Margin="334,203,0,0" VerticalAlignment="Top" Width="448"/>
     </Grid>
 </Window>

@@ -25,6 +25,7 @@ namespace AdMakerM
         public string AdTitle { get; set; } = "Игровой ПК ";
         public string AdDesc { get; set; } = "Игровой ПК ";
         public ObservableCollection<VideoAdapter> VideoAdaptersColl { get; set; } = new ObservableCollection<VideoAdapter>();
+        public ObservableCollection<Memory> MemoryOptionsColl { get; set; } = new ObservableCollection<Memory>();
         public int Memory { get; set; } = 0;
         public int TDP { get; set; } = 0;
         public decimal Price { get; set; } = 0;
@@ -40,8 +41,8 @@ namespace AdMakerM
         {
             Views.VideoCards f = new Views.VideoCards(global);
             f.ShowDialog();
-            VideoAdaptersColl=f.SelectedVideo;
-            videoAdaptersDataGrid.ItemsSource=null;
+            VideoAdaptersColl = f.SelectedVideo;
+            videoAdaptersDataGrid.ItemsSource = null;
             videoAdaptersDataGrid.ItemsSource = VideoAdaptersColl;
             videoAdaptersDataGrid.Items.Refresh();
         }
@@ -52,9 +53,18 @@ namespace AdMakerM
             {
                 Title = AdTitle,
                 Descriptrion = AdDesc,
-                Price= Price,
-
+                Price = Price
             };
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Views.AddMemory f = new Views.AddMemory(global);
+            f.ShowDialog();
+            MemoryOptionsColl = f.SelectedMemory;
+            memoryOptionsDataGrid.ItemsSource = null;
+            memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
+            memoryOptionsDataGrid.Items.Refresh();
         }
     }
 }

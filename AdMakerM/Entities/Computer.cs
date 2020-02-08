@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace AdMakerM
 {
@@ -15,12 +16,12 @@ namespace AdMakerM
         public string ImgFileName { get; set; }
         public string ImgFileDir { get; set; }
         public string ImgFilePath { get; set; }
-        public List<Processor> Processors { get; set; }
-        public List<Memory> Memories { get; set; }
-        public List<PowerSupply> PowerSupplys { get; set; }
-        public List<VideoAdapter> VideoAdapters { get; set; }
-        public List<HDD> HDDs { get; set; }
-        public List<SSD> SSDs { get; set; }
+        public ObservableCollection<Processor> Processors { get; set; }
+        public ObservableCollection<Memory> Memories { get; set; }
+        public ObservableCollection<PowerSupply> PowerSupplys { get; set; }
+        public ObservableCollection<VideoAdapter> VideoAdapters { get; set; }
+        public ObservableCollection<HDD> HDDs { get; set; }
+        public ObservableCollection<SSD> SSDs { get; set; }
         
     }
 }

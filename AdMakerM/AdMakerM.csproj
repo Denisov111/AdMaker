@@ -59,6 +59,9 @@
     <Compile Include="Views\AddComp.xaml.cs">
       <DependentUpon>AddComp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddMemory.xaml.cs">
+      <DependentUpon>AddMemory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VideoCards.xaml.cs">
       <DependentUpon>VideoCards.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AddComp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddMemory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
