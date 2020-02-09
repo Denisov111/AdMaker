@@ -10,6 +10,7 @@ namespace AdMakerM
     class Computer : IProduct
     {
         public ProductType ProductType { get => ProductType.Computer; }
+        public string Guid { get; set; }
         public string Title { get; set; }
         public string Descriptrion { get; set; }
         public decimal Price { get; set; }
@@ -23,6 +24,6 @@ namespace AdMakerM
         public ObservableCollection<HDD> HDDs { get; set; }
         public ObservableCollection<SSD> SSDs { get; set; }
 
-        public string Guid => throw new NotImplementedException();
+        
     }
 }

@@ -59,8 +59,14 @@
     <Compile Include="Views\AddComp.xaml.cs">
       <DependentUpon>AddComp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddHDD.xaml.cs">
+      <DependentUpon>AddHDD.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddMemory.xaml.cs">
       <DependentUpon>AddMemory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddSSD.xaml.cs">
+      <DependentUpon>AddSSD.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VideoCards.xaml.cs">
       <DependentUpon>VideoCards.xaml</DependentUpon>
@@ -91,7 +97,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddHDD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddMemory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddSSD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

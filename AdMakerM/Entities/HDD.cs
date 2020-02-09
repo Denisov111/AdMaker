@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 
 namespace AdMakerM
 {
-    class HDD : IProduct
+    public class HDD : IProduct
     {
         public ProductType ProductType { get => ProductType.Computer; }
+        public string Guid { get; set; }
         public string Title { get; set; }
+        public int Volume { get; set; }
         public string Descriptrion { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }
         public string ImgFileDir { get; set; }
         public string ImgFilePath { get; set; }
 
-        public string Guid => throw new NotImplementedException();
+        
     }
 }

@@ -5,20 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMakerM"
         mc:Ignorable="d"
-        Title="AddComp" Height="540.896" Width="800">
+        Title="AddComp" Height="740" Width="800">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="490" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
+        <StackPanel HorizontalAlignment="Left" Height="690" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
             <Label Content="Новое объявление"/>
             <Label Content="Название"/>
             <!--<TextBox Height="43" TextWrapping="Wrap"
                      Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox Height="43" TextWrapping="Wrap"
-                     Text="{Binding AdTitle}"/>
+                     Text="{Binding AdTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Объявление"/>
             <!--<TextBox Height="104" TextWrapping="Wrap" 
                      Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
-            <TextBox Height="104" TextWrapping="Wrap" 
-                     Text="{Binding AdDesc}"/>
+            <TextBox x:Name="descTextBox" Height="104" TextWrapping="Wrap" 
+                     Text="{Binding AdDesc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <StackPanel Height="30" Orientation="Horizontal">
+                <Button Content="video" Click="Button_Click_2"/>
+                <Button Content="memory" Click="Button_Click_2"/>
+                <Button Content="hdd" Click="Button_Click_2"/>
+                <Button Content="ssd" Click="Button_Click_2"/>
+
+            </StackPanel>
             <StackPanel Height="150">
                 <Label Content="опции сборки"/>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
@@ -37,13 +44,13 @@
                     <CheckBox x:Name="addSSDToOptionCheckBox" VerticalAlignment="Center"/>
                     <Button Content="SSD" 
                         Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards"
-                           Margin="20,0,0,0" Width="150" />
+                           Margin="20,0,0,0" Width="150" Click="Button_Click_3" />
                 </StackPanel>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
                     <CheckBox x:Name="addHDDToOptionCheckBox" VerticalAlignment="Center"/>
                     <Button Content="HDD" 
                         Command="{Binding UniversalCommand}" CommandParameter="ChangeVideoCards"
-                           Margin="20,0,0,0" Width="150" />
+                           Margin="20,0,0,0" Width="150" Click="Button_Click_4" />
                 </StackPanel>
 
             </StackPanel>
@@ -59,7 +66,8 @@
                 <TextBox Height="27" TextWrapping="Wrap" Width="100"/>
                 <Label Content="макс."/>-->
                 <Label Content="Цена без опций"/>
-                <TextBox Height="27" TextWrapping="Wrap" Width="100" />
+                <TextBox Height="27" TextWrapping="Wrap" Width="100"
+                         Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
             <Button Content="Добавить"
                     x:Name="addCompButton"

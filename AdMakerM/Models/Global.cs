@@ -15,6 +15,8 @@ namespace AdMakerM
 
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<Memory> MemoryOptions { get; set; } = new ObservableCollection<Memory>();
+        public ObservableCollection<SSD> SSDOptions { get; set; } = new ObservableCollection<SSD>();
+        public ObservableCollection<HDD> HDDOptions { get; set; } = new ObservableCollection<HDD>();
 
         //public ObservableCollection<VideoAdapter> ads { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<IProduct> Products { get; set; } = new ObservableCollection<IProduct>();
@@ -24,14 +26,14 @@ namespace AdMakerM
             InitStore();
             VideoAdapters.CollectionChanged += VideoAdapters_CollectionChanged;
             MemoryOptions.CollectionChanged += VideoAdapters_CollectionChanged;
+            SSDOptions.CollectionChanged += VideoAdapters_CollectionChanged;
+            HDDOptions.CollectionChanged += VideoAdapters_CollectionChanged;
         }
 
         private void VideoAdapters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             SaveAll();
         }
-
-        
 
         internal void SaveAll()
         {
@@ -40,6 +42,8 @@ namespace AdMakerM
             XElement st = new XElement("store");
             XElement video = new XElement("videoadapters");
             XElement memoryOptions = new XElement("memory_options");
+            XElement ssdOptions = new XElement("ssd_options");
+            XElement hddOptions = new XElement("hdd_options");
 
             doc.Add(st);
 
@@ -68,6 +72,30 @@ namespace AdMakerM
 
             }
             doc.Root.Add(memoryOptions);
+
+            foreach (SSD ssd in SSDOptions)
+            {
+                XElement ssdOptEl = new XElement("ssd_options",
+                                new XElement("title", ssd.Title),
+                                new XElement("volume", ssd.Volume),
+                                new XElement("price", ssd.Price),
+                                new XElement("guid", ssd.Guid));
+                ssdOptions.Add(ssdOptEl);
+
+            }
+            doc.Root.Add(ssdOptions);
+
+            foreach (HDD hdd in HDDOptions)
+            {
+                XElement hddOptEl = new XElement("hdd_options",
+                                new XElement("title", hdd.Title),
+                                new XElement("volume", hdd.Volume),
+                                new XElement("price", hdd.Price),
+                                new XElement("guid", hdd.Guid));
+                hddOptions.Add(hddOptEl);
+
+            }
+            doc.Root.Add(hddOptions);
 
             doc.Save(storeFile);
         }
@@ -127,6 +155,46 @@ namespace AdMakerM
                     };
                     MemoryOptions.Add(memory);
                 }
+
+                if(doc.Root.Element("ssd_options")!=null)
+                {
+
+                }
+
+                foreach (XElement el in doc.Root.Element("ssd_options").Elements())
+                {
+                    string title = el.Element("title").Value;
+                    int volume = Int32.Parse(el.Element("volume").Value);
+                    decimal price = (decimal)Double.Parse(el.Element("price").Value);
+                    string guid = (el.Element("guid") == null) ? "" : el.Element("guid").Value;
+
+                    SSD ssd = new SSD()
+                    {
+                        Title = title,
+                        Volume = volume,
+                        Price = price,
+                        Guid = guid
+                    };
+                    SSDOptions.Add(ssd);
+                }
+
+                foreach (XElement el in doc.Root.Element("hdd_options").Elements())
+                {
+                    string title = el.Element("title").Value;
+                    int volume = Int32.Parse(el.Element("volume").Value);
+                    decimal price = (decimal)Double.Parse(el.Element("price").Value);
+                    string guid = (el.Element("guid") == null) ? "" : el.Element("guid").Value;
+
+                    HDD hdd = new HDD()
+                    {
+                        Title = title,
+                        Volume = volume,
+                        Price = price,
+                        Guid = guid
+                    };
+                    HDDOptions.Add(hdd);
+                }
+
             }
             catch (Exception ex)
             {

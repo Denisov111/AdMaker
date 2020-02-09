@@ -53,7 +53,9 @@ namespace AdMakerM
             {
                 Title = AdTitle,
                 Descriptrion = AdDesc,
-                Price = Price
+                Price = Price,
+                Memories = MemoryOptionsColl,
+                VideoAdapters = VideoAdaptersColl
             };
         }
 
@@ -62,6 +64,32 @@ namespace AdMakerM
             Views.AddMemory f = new Views.AddMemory(global);
             f.ShowDialog();
             MemoryOptionsColl = f.SelectedMemory;
+            memoryOptionsDataGrid.ItemsSource = null;
+            memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
+            memoryOptionsDataGrid.Items.Refresh();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            descTextBox.Text += " {"+ text + "}";
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Views.AddSSD f = new Views.AddSSD(global);
+            f.ShowDialog();
+            //MemoryOptionsColl = f.SelectedMemory;
+            memoryOptionsDataGrid.ItemsSource = null;
+            memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
+            memoryOptionsDataGrid.Items.Refresh();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Views.AddHDD f = new Views.AddHDD(global);
+            f.ShowDialog();
+            //MemoryOptionsColl = f.SelectedMemory;
             memoryOptionsDataGrid.ItemsSource = null;
             memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
             memoryOptionsDataGrid.Items.Refresh();

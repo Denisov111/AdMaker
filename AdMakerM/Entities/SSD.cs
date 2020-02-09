@@ -6,16 +6,36 @@ using System.Threading.Tasks;
 
 namespace AdMakerM
 {
-    class SSD : IProduct
+    public class SSD : IProduct
     {
-        public ProductType ProductType { get => ProductType.Computer; }
+        public ProductType ProductType { get => ProductType.SSD; }
+        public string Guid { get; set; }
         public string Title { get; set; }
+        public int Volume { get; set; }
         public string Descriptrion { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }
         public string ImgFileDir { get; set; }
         public string ImgFilePath { get; set; }
 
-        public string Guid => throw new NotImplementedException();
+        public override string ToString()
+        {
+            return Title + " " + Volume + " Гб";
+        }
+
+        public SSD Clone()
+        {
+            return new SSD()
+            {
+                Guid = Guid,
+                Title = Title,
+                Descriptrion = Descriptrion,
+                Price = Price,
+                ImgFileName = ImgFileName,
+                ImgFileDir = ImgFileDir,
+                ImgFilePath = ImgFilePath,
+                Volume = Volume
+            };
+        }
     }
 }

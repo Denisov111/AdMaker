@@ -1,0 +1,50 @@
+﻿<Window x:Class="AdMakerM.Views.AddSSD"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdMakerM.Views"
+        mc:Ignorable="d"
+        Title="AddSSD" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="ssdDataGrid" HorizontalAlignment="Left" Height="143" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"
+                  ItemsSource="{Binding SSDOptions}"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="MemoryType" Binding="{Binding MemoryType}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,182,0,0" VerticalAlignment="Top" Width="713">
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Название" Width="117"/>
+                <TextBox x:Name="cardTitleTextBox" Height="22" TextWrapping="Wrap"  Width="117" Text="{Binding Local.SSDTitle}"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Память" Width="117"/>
+                <TextBox x:Name="volumeTextBox"
+                         Height="22" TextWrapping="Wrap" Width="117" 
+                         Text="{Binding Local.Volume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="60" Width="35" Click="Button_Click_3"/>
+                <Button Content="90" Width="35" Click="Button_Click_3"/>
+                <Button Content="120" Width="35" Click="Button_Click_3"/>
+                <Button Content="128" Width="35" Click="Button_Click_3"/>
+                <Button Content="160" Width="35" Click="Button_Click_3"/>
+                <Button Content="240" Width="35" Click="Button_Click_3"/>
+                <Button Content="256" Width="35" Click="Button_Click_3"/>
+                <Button Content="480" Width="35" Click="Button_Click_3"/>
+                <Button Content="512" Width="35" Click="Button_Click_3"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Цена" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap" Width="117" Text="{Binding Local.Price}"/>
+            </StackPanel>
+            <Button Content="Добавить SSD на склад" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
+            <Button Content="Добавить HDD в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_9"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

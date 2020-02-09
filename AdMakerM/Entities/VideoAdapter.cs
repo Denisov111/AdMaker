@@ -28,6 +28,7 @@ namespace AdMakerM
         {
             return new VideoAdapter()
             {
+                Guid = Guid,
                 Title = Title,
                 Descriptrion = Descriptrion,
                 Price = Price,

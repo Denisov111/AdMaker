@@ -35,6 +35,7 @@ namespace AdMakerM
         {
             return new Memory()
             {
+                Guid = Guid,
                 Title = Title,
                 Descriptrion = Descriptrion,
                 Price = Price,
