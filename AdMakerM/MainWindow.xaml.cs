@@ -47,5 +47,10 @@ namespace AdMakerM
         {
             global.Edit(((Button)sender).Tag.ToString());
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            global.ShowAds(((Button)sender).Tag.ToString());
+        }
     }
 }

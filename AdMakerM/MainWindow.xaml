@@ -10,13 +10,21 @@
 
         <Grid.Resources>
             <DataTemplate x:Key="EditButton">
-                <Button CommandParameter="{Binding Title}" 
-                        Content="Изменить" 
+                <Button Content="Изменить" 
                         Tag="{Binding Guid}"
-                        Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.Context.EditProfileCommand}" Click="Button_Click_1">
+                         Click="Button_Click_1">
                     
                 </Button>
             </DataTemplate>
+            <DataTemplate x:Key="AdsButton">
+                <Button Content="Объявления" 
+                        Tag="{Binding Guid}"
+                        Click="Button_Click_2">
+
+                </Button>
+            </DataTemplate>
+            
+
         </Grid.Resources>
         
         
@@ -26,10 +34,11 @@
                   ItemsSource="{Binding Comps}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" DisplayIndex="1" Width="400" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Guid" Binding="{Binding Guid}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Guid" Binding="{Binding Guid}" Width="50" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTemplateColumn Header="" DisplayIndex="4" CellTemplate="{StaticResource EditButton}"/>
+                <DataGridTemplateColumn Header="" DisplayIndex="5" CellTemplate="{StaticResource AdsButton}"/>
             </DataGrid.Columns>
         </DataGrid>
 

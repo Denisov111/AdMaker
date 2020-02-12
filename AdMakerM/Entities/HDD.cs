@@ -20,7 +20,10 @@ namespace AdMakerM
 
         public override string ToString()
         {
-            return Title + " " + Volume + " Гб";
+            if(Volume>0)
+                return Title + " " + Volume + " Гб";
+            else
+                return Title;
         }
 
         public HDD Clone()

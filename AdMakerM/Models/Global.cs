@@ -19,6 +19,7 @@ namespace AdMakerM
         public ObservableCollection<Memory> MemoryOptions { get; set; } = new ObservableCollection<Memory>();
         public ObservableCollection<SSD> SSDOptions { get; set; } = new ObservableCollection<SSD>();
         public ObservableCollection<HDD> HDDOptions { get; set; } = new ObservableCollection<HDD>();
+        public ObservableCollection<Processor> ProcessorOptions { get; set; } = new ObservableCollection<Processor>();
 
         //public ObservableCollection<VideoAdapter> ads { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<IProduct> Products { get; set; } = new ObservableCollection<IProduct>();
@@ -30,7 +31,16 @@ namespace AdMakerM
             MemoryOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             SSDOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             HDDOptions.CollectionChanged += VideoAdapters_CollectionChanged;
+            ProcessorOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             Comps.CollectionChanged+= VideoAdapters_CollectionChanged;
+        }
+
+        internal void ShowAds(string guid)
+        {
+            Computer comp = Comps.Where(c => c.Guid == guid).FirstOrDefault();
+
+            Views.Ads f = new Views.Ads(this, comp);
+            f.ShowDialog();
         }
 
         internal void Edit(string guid)
@@ -41,7 +51,7 @@ namespace AdMakerM
             f.ShowDialog();
         }
 
-        private void VideoAdapters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void VideoAdapters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             SaveAll();
         }
@@ -56,6 +66,7 @@ namespace AdMakerM
             XElement memoryOptions = new XElement("memory_options");
             XElement ssdOptions = new XElement("ssd_options");
             XElement hddOptions = new XElement("hdd_options");
+            XElement processorOptions = new XElement("processor_options");
 
             doc.Add(st);
 
@@ -109,6 +120,17 @@ namespace AdMakerM
                         hddEl.Add(new XElement("guid", guid));
                     }
                     compEl.Add(hddEl);
+                }
+
+                if (comp.Processors != null)
+                {
+                    XElement processorEl = new XElement("processor_options");
+                    foreach (Processor processor in comp.Processors)
+                    {
+                        string guid = processor.Guid;
+                        processorEl.Add(new XElement("guid", guid));
+                    }
+                    compEl.Add(processorEl);
                 }
 
                 comps.Add(compEl);
@@ -165,6 +187,18 @@ namespace AdMakerM
 
             }
             doc.Root.Add(hddOptions);
+
+            foreach (Processor processor in ProcessorOptions)
+            {
+                XElement processorOptEl = new XElement("processor_options",
+                                new XElement("title", processor.Title),
+                                new XElement("socket", processor.Socket.ToString()),
+                                new XElement("price", processor.Price),
+                                new XElement("guid", processor.Guid));
+                processorOptions.Add(processorOptEl);
+
+            }
+            doc.Root.Add(processorOptions);
 
             doc.Save(storeFile);
         }
@@ -261,6 +295,24 @@ namespace AdMakerM
                     HDDOptions.Add(hdd);
                 }
 
+                foreach (XElement el in doc.Root.Element("processor_options").Elements())
+                {
+                    string title = el.Element("title").Value;
+                    string socket = el.Element("socket").Value;
+                    decimal price = (decimal)Double.Parse(el.Element("price").Value);
+                    string guid = (el.Element("guid") == null) ? "" : el.Element("guid").Value;
+
+                    ProcessorSocket ps = (ProcessorSocket)Enum.Parse(typeof(ProcessorSocket), socket);
+
+                    Processor pr = new Processor()
+                    {
+                        Title = title,
+                        Socket = ps,
+                        Price = price,
+                        Guid = guid
+                    };
+                    ProcessorOptions.Add(pr);
+                }
 
                 //объекты компьютеров собираем в последнюю очередь,
                 //чтобы опции сборки были уже проинициализированы
@@ -285,7 +337,7 @@ namespace AdMakerM
                         {
                             string guidVa = vaEl.Value;
                             VideoAdapter va = VideoAdapters.Where(v => v.Guid== guidVa).FirstOrDefault();
-                            comp.VideoAdapters.Add(va);
+                            if (va != null) comp.VideoAdapters.Add(va);
                         }
                     }
 
@@ -295,7 +347,7 @@ namespace AdMakerM
                         {
                             string guidVa = vaEl.Value;
                             Memory va = MemoryOptions.Where(v => v.Guid == guidVa).FirstOrDefault();
-                            comp.Memories.Add(va);
+                            if (va != null) comp.Memories.Add(va);
                         }
                     }
 
@@ -305,7 +357,7 @@ namespace AdMakerM
                         {
                             string guidVa = vaEl.Value;
                             SSD va = SSDOptions.Where(v => v.Guid == guidVa).FirstOrDefault();
-                            comp.SSDs.Add(va);
+                            if (va != null) comp.SSDs.Add(va);
                         }
                     }
 
@@ -315,7 +367,17 @@ namespace AdMakerM
                         {
                             string guidVa = vaEl.Value;
                             HDD va = HDDOptions.Where(v => v.Guid == guidVa).FirstOrDefault();
-                            comp.HDDs.Add(va);
+                            if (va != null) comp.HDDs.Add(va);
+                        }
+                    }
+
+                    if (el.Element("processor_options") != null)
+                    {
+                        foreach (XElement processorEl in el.Element("processor_options").Elements())
+                        {
+                            string guidPr = processorEl.Value;
+                            Processor pr = ProcessorOptions.Where(v => v.Guid == guidPr).FirstOrDefault();
+                            if(pr!=null) comp.Processors.Add(pr);
                         }
                     }
 

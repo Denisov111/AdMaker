@@ -30,6 +30,7 @@ namespace AdMakerM
         public ObservableCollection<Memory> MemoryOptionsColl { get; set; } = new ObservableCollection<Memory>();
         public ObservableCollection<SSD> SSDOptionsColl { get; set; } = new ObservableCollection<SSD>();
         public ObservableCollection<HDD> HDDOptionsColl { get; set; } = new ObservableCollection<HDD>();
+        public ObservableCollection<Processor> ProcessorOptionsColl { get; set; } = new ObservableCollection<Processor>();
         public int Memory { get; set; } = 0;
         public int TDP { get; set; } = 0;
         public decimal Price { get; set; } = 0;
@@ -41,6 +42,7 @@ namespace AdMakerM
             this.global = global;
             DataContext = this;
 
+
             if(comp!=null)
             {
                 editMode = true;
@@ -49,7 +51,9 @@ namespace AdMakerM
                 MemoryOptionsColl = comp.Memories;
                 SSDOptionsColl = comp.SSDs;
                 HDDOptionsColl = comp.HDDs;
+                ProcessorOptionsColl = comp.Processors;
             }
+            this.comp = comp;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -90,7 +94,8 @@ namespace AdMakerM
         {
             if(editMode)
             {
-                
+                comp.Price = Price;
+                global.SaveAll();
             }
             else
             {
@@ -103,7 +108,8 @@ namespace AdMakerM
                     Memories = MemoryOptionsColl,
                     VideoAdapters = VideoAdaptersColl,
                     SSDs = SSDOptionsColl,
-                    HDDs = HDDOptionsColl
+                    HDDs = HDDOptionsColl,
+                    Processors = ProcessorOptionsColl
                 };
                 global.Comps.Add(comp);
             }
@@ -147,6 +153,17 @@ namespace AdMakerM
             hddOptionsDataGrid.ItemsSource = null;
             hddOptionsDataGrid.ItemsSource = HDDOptionsColl;
             hddOptionsDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            Views.AddProcessor f = new Views.AddProcessor(global);
+            f.ShowDialog();
+            ProcessorOptionsColl = f.SelectedProcessors;
+            processorOptionsDataGrid.ItemsSource = null;
+            processorOptionsDataGrid.ItemsSource = ProcessorOptionsColl;
+            processorOptionsDataGrid.Items.Refresh();
             ShowVariants();
         }
     }
