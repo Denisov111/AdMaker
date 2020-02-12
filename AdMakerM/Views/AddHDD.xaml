@@ -7,6 +7,42 @@
         mc:Ignorable="d"
         Title="AddHDD" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="hddDataGrid" HorizontalAlignment="Left" Height="143" Margin="10,10,0,0" VerticalAlignment="Top" Width="772"
+                  ItemsSource="{Binding HDDOptions}"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,182,0,0" VerticalAlignment="Top" Width="713">
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Название" Width="117"/>
+                <TextBox x:Name="cardTitleTextBox" Height="22" TextWrapping="Wrap"  Width="117" Text="{Binding Local.HDDTitle}"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Память" Width="117"/>
+                <TextBox x:Name="volumeTextBox"
+                         Height="22" TextWrapping="Wrap" Width="117" 
+                         Text="{Binding Local.Volume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="80" Width="35" Click="Button_Click_3"/>
+                <Button Content="120" Width="35" Click="Button_Click_3"/>
+                <Button Content="160" Width="35" Click="Button_Click_3"/>
+                <Button Content="250" Width="35" Click="Button_Click_3"/>
+                <Button Content="320" Width="35" Click="Button_Click_3"/>
+                <Button Content="500" Width="35" Click="Button_Click_3"/>
+                <Button Content="750" Width="35" Click="Button_Click_3"/>
+                <Button Content="1000" Width="35" Click="Button_Click_3"/>
+                <Button Content="1500" Width="35" Click="Button_Click_3"/>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal">
+                <Label Content="Цена" Width="117"/>
+                <TextBox Height="22" TextWrapping="Wrap" Width="117" Text="{Binding Local.Price}"/>
+            </StackPanel>
+            <Button Content="Добавить SSD на склад" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
+            <Button Content="Добавить HDD в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_9"/>
+        </StackPanel>
     </Grid>
 </Window>

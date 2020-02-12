@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace AdMakerM
 {
-    class PowerSupply : IProduct
+    public class PowerSupply : IProduct
     {
         public ProductType ProductType { get => ProductType.Computer; }
         public string Title { get; set; }
-        public string Descriptrion { get; set; }
+        public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }
         public string ImgFileDir { get; set; }

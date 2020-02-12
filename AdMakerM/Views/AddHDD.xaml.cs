@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace AdMakerM.Views
 {
@@ -21,14 +22,52 @@ namespace AdMakerM.Views
     {
         private Global global;
 
-        public AddHDD()
-        {
-            InitializeComponent();
-        }
+        public string HDDTitle { get; set; } = "WD";
+        public int Volume { get; set; } = 500;
+        public decimal Price { get; set; } = 1000;
+        public ObservableCollection<HDD> SelectedHDD { get; set; } = new ObservableCollection<HDD>();
 
         public AddHDD(Global global)
         {
+            InitializeComponent();
             this.global = global;
+
+            DataContext = new
+            {
+                HDDOptions = global.HDDOptions,
+                Local = this
+            };
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            volumeTextBox.Text = text;
+            Volume = Int32.Parse(text);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            HDD hdd = new HDD()
+            {
+                Title = HDDTitle,
+                Volume = Volume,
+                Price = Price,
+                Guid = Guid.NewGuid().ToString()
+            };
+            Console.WriteLine(hdd);
+            global.HDDOptions.Add(hdd);
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            foreach (var hdd in hddDataGrid.SelectedItems)
+            {
+                Console.WriteLine(hdd);
+                HDD adapter = ((HDD)hdd).Clone();
+                SelectedHDD.Add(adapter);
+            }
+            Close();
         }
     }
 }

@@ -18,7 +18,7 @@ namespace AdMakerM
         public ProductType ProductType { get => ProductType.Memory; }
         public string Guid { get; set; }
         public string Title { get; set; }
-        public string Descriptrion { get; set; }
+        public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }
         public string ImgFileDir { get; set; }
@@ -37,7 +37,7 @@ namespace AdMakerM
             {
                 Guid = Guid,
                 Title = Title,
-                Descriptrion = Descriptrion,
+                Description = Description,
                 Price = Price,
                 ImgFileName = ImgFileName,
                 ImgFileDir = ImgFileDir,

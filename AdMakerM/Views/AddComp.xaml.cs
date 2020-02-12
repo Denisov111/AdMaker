@@ -21,20 +21,35 @@ namespace AdMakerM
     public partial class AddComp : Window
     {
         Global global;
+        Computer comp;
+        public bool editMode = false;
 
         public string AdTitle { get; set; } = "Игровой ПК ";
         public string AdDesc { get; set; } = "Игровой ПК ";
         public ObservableCollection<VideoAdapter> VideoAdaptersColl { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<Memory> MemoryOptionsColl { get; set; } = new ObservableCollection<Memory>();
+        public ObservableCollection<SSD> SSDOptionsColl { get; set; } = new ObservableCollection<SSD>();
+        public ObservableCollection<HDD> HDDOptionsColl { get; set; } = new ObservableCollection<HDD>();
         public int Memory { get; set; } = 0;
         public int TDP { get; set; } = 0;
         public decimal Price { get; set; } = 0;
+        
 
-        public AddComp(Global global)
+        public AddComp(Global global, Computer comp)
         {
             InitializeComponent();
             this.global = global;
             DataContext = this;
+
+            if(comp!=null)
+            {
+                editMode = true;
+                Price = comp.Price;
+                VideoAdaptersColl = comp.VideoAdapters;
+                MemoryOptionsColl = comp.Memories;
+                SSDOptionsColl = comp.SSDs;
+                HDDOptionsColl = comp.HDDs;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -45,18 +60,55 @@ namespace AdMakerM
             videoAdaptersDataGrid.ItemsSource = null;
             videoAdaptersDataGrid.ItemsSource = VideoAdaptersColl;
             videoAdaptersDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void ShowVariants()
+        {
+            int variantsCount = 1;
+            if(VideoAdaptersColl.Count!=0)
+            {
+                variantsCount = variantsCount * VideoAdaptersColl.Count;
+            }
+            if (MemoryOptionsColl.Count != 0)
+            {
+                variantsCount = variantsCount * MemoryOptionsColl.Count;
+            }
+            if (SSDOptionsColl.Count != 0)
+            {
+                variantsCount = variantsCount * SSDOptionsColl.Count;
+            }
+            if (HDDOptionsColl.Count != 0)
+            {
+                variantsCount = variantsCount * HDDOptionsColl.Count;
+            }
+            
+            variantsLabel.Content = variantsCount.ToString();
         }
 
         private void AddCompButton_Click(object sender, RoutedEventArgs e)
         {
-            Computer comp = new Computer()
+            if(editMode)
             {
-                Title = AdTitle,
-                Descriptrion = AdDesc,
-                Price = Price,
-                Memories = MemoryOptionsColl,
-                VideoAdapters = VideoAdaptersColl
-            };
+                
+            }
+            else
+            {
+                comp = new Computer()
+                {
+                    Guid = Guid.NewGuid().ToString(),
+                    Title = AdTitle,
+                    Description = AdDesc,
+                    Price = Price,
+                    Memories = MemoryOptionsColl,
+                    VideoAdapters = VideoAdaptersColl,
+                    SSDs = SSDOptionsColl,
+                    HDDs = HDDOptionsColl
+                };
+                global.Comps.Add(comp);
+            }
+            
+            Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -67,6 +119,7 @@ namespace AdMakerM
             memoryOptionsDataGrid.ItemsSource = null;
             memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
             memoryOptionsDataGrid.Items.Refresh();
+            ShowVariants();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
@@ -79,20 +132,22 @@ namespace AdMakerM
         {
             Views.AddSSD f = new Views.AddSSD(global);
             f.ShowDialog();
-            //MemoryOptionsColl = f.SelectedMemory;
-            memoryOptionsDataGrid.ItemsSource = null;
-            memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
-            memoryOptionsDataGrid.Items.Refresh();
+            SSDOptionsColl = f.SelectedSSD;
+            ssdOptionsDataGrid.ItemsSource = null;
+            ssdOptionsDataGrid.ItemsSource = SSDOptionsColl;
+            ssdOptionsDataGrid.Items.Refresh();
+            ShowVariants();
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             Views.AddHDD f = new Views.AddHDD(global);
             f.ShowDialog();
-            //MemoryOptionsColl = f.SelectedMemory;
-            memoryOptionsDataGrid.ItemsSource = null;
-            memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
-            memoryOptionsDataGrid.Items.Refresh();
+            HDDOptionsColl = f.SelectedHDD;
+            hddOptionsDataGrid.ItemsSource = null;
+            hddOptionsDataGrid.ItemsSource = HDDOptionsColl;
+            hddOptionsDataGrid.Items.Refresh();
+            ShowVariants();
         }
     }
 }

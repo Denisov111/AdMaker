@@ -72,29 +72,61 @@
             <Button Content="Добавить"
                     x:Name="addCompButton"
                     Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20" Click="AddCompButton_Click"/>
+            
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Варианты:   "/>
+                <Label x:Name="variantsLabel"/>
+            </StackPanel>
         </StackPanel>
-        <DataGrid ItemsSource="{Binding VideoAdaptersColl}"
-                  x:Name="videoAdaptersDataGrid"
-            HorizontalAlignment="Left" Height="188" Margin="334,10,0,0" VerticalAlignment="Top" Width="448"
-                  AutoGenerateColumns="False" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Memory" Binding="{Binding Memory}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="TDP" Binding="{Binding TDP}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid ItemsSource="{Binding MemoryOptionsColl}"
-                  x:Name="memoryOptionsDataGrid"
-                  HorizontalAlignment="Left" Height="177" Margin="334,203,0,0" VerticalAlignment="Top" Width="448"
-                  AutoGenerateColumns="False" CanUserAddRows="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="MemoryType" Binding="{Binding MemoryType}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
-            </DataGrid.Columns>
 
-        </DataGrid>
+        <StackPanel HorizontalAlignment="Left" Height="663" Margin="317,10,0,0" VerticalAlignment="Top" Width="465">
+            <DataGrid ItemsSource="{Binding VideoAdaptersColl}"
+                  x:Name="videoAdaptersDataGrid"
+            HorizontalAlignment="Left" Height="137" Margin="0,0,0,5" VerticalAlignment="Top" Width="448"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Memory" Binding="{Binding Memory}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="TDP" Binding="{Binding TDP}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid ItemsSource="{Binding MemoryOptionsColl}"
+                  x:Name="memoryOptionsDataGrid"
+                  HorizontalAlignment="Left" Height="127" Margin="0,0,0,5" VerticalAlignment="Top" Width="448"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="MemoryType" Binding="{Binding MemoryType}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+            <DataGrid ItemsSource="{Binding SSDOptionsColl}"
+                  x:Name="ssdOptionsDataGrid"
+                  HorizontalAlignment="Left" Height="142" Margin="0,0,0,5" VerticalAlignment="Top" Width="448"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid ItemsSource="{Binding HDDOptionsColl}"
+                  x:Name="hddOptionsDataGrid"
+                  HorizontalAlignment="Left" Height="142" Margin="0,0,0,5" VerticalAlignment="Top" Width="448"
+                  AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Volume" Binding="{Binding Volume}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            
+        </StackPanel>
+
     </Grid>
 </Window>

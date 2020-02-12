@@ -13,6 +13,8 @@ namespace AdMakerM
     {
         string storeFile = @"store.xml";
 
+        public ObservableCollection<Computer> Comps { get; set; } = new ObservableCollection<Computer>();
+
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<Memory> MemoryOptions { get; set; } = new ObservableCollection<Memory>();
         public ObservableCollection<SSD> SSDOptions { get; set; } = new ObservableCollection<SSD>();
@@ -28,6 +30,15 @@ namespace AdMakerM
             MemoryOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             SSDOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             HDDOptions.CollectionChanged += VideoAdapters_CollectionChanged;
+            Comps.CollectionChanged+= VideoAdapters_CollectionChanged;
+        }
+
+        internal void Edit(string guid)
+        {
+            Computer comp = Comps.Where(c=>c.Guid==guid).FirstOrDefault();
+
+            AddComp f = new AddComp(this, comp);
+            f.ShowDialog();
         }
 
         private void VideoAdapters_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -40,12 +51,70 @@ namespace AdMakerM
             
             XDocument doc = new XDocument();
             XElement st = new XElement("store");
+            XElement comps = new XElement("comps");
             XElement video = new XElement("videoadapters");
             XElement memoryOptions = new XElement("memory_options");
             XElement ssdOptions = new XElement("ssd_options");
             XElement hddOptions = new XElement("hdd_options");
 
             doc.Add(st);
+
+            foreach (Computer comp in Comps)
+            {
+                XElement compEl = new XElement("comp",
+                                new XElement("title", comp.Title),
+                                new XElement("desc", comp.Description),
+                                new XElement("price", comp.Price),
+                                new XElement("guid", comp.Guid));
+
+                if(comp.VideoAdapters!=null)
+                {
+                    XElement videoEl = new XElement("video_adapters");
+                    foreach(VideoAdapter va in comp.VideoAdapters)
+                    {
+                        string guid = va.Guid;
+                        videoEl.Add(new XElement("guid",guid));
+                    }
+                    compEl.Add(videoEl);
+                }
+
+                if (comp.Memories != null)
+                {
+                    XElement memoryEl = new XElement("memory_options");
+                    foreach (Memory mem in comp.Memories)
+                    {
+                        string guid = mem.Guid;
+                        memoryEl.Add(new XElement("guid", guid));
+                    }
+                    compEl.Add(memoryEl);
+                }
+
+                if (comp.SSDs != null)
+                {
+                    XElement ssdEl = new XElement("ssd_options");
+                    foreach (SSD ssd in comp.SSDs)
+                    {
+                        string guid = ssd.Guid;
+                        ssdEl.Add(new XElement("guid", guid));
+                    }
+                    compEl.Add(ssdEl);
+                }
+
+                if (comp.HDDs != null)
+                {
+                    XElement hddEl = new XElement("hdd_options");
+                    foreach (HDD hdd in comp.HDDs)
+                    {
+                        string guid = hdd.Guid;
+                        hddEl.Add(new XElement("guid", guid));
+                    }
+                    compEl.Add(hddEl);
+                }
+
+                comps.Add(compEl);
+
+            }
+            doc.Root.Add(comps);
 
             foreach (VideoAdapter va in VideoAdapters)
             {
@@ -109,13 +178,15 @@ namespace AdMakerM
             {
                 doc = XDocument.Load(storeFile);
 
+                
+
                 foreach (XElement el in doc.Root.Element("videoadapters").Elements())
                 {
                     string title = el.Element("title").Value;
                     int memory = Int32.Parse(el.Element("memory").Value);
-                    int tdp = Int32.Parse( el.Element("tdp").Value);
-                    decimal price = (decimal)Double.Parse( el.Element("price").Value);
-                    string guid = (el.Element("guid")==null)?"":el.Element("guid").Value;
+                    int tdp = Int32.Parse(el.Element("tdp").Value);
+                    decimal price = (decimal)Double.Parse(el.Element("price").Value);
+                    string guid = (el.Element("guid") == null) ? "" : el.Element("guid").Value;
 
                     VideoAdapter va = new VideoAdapter()
                     {
@@ -123,7 +194,7 @@ namespace AdMakerM
                         Memory = memory,
                         TDP = tdp,
                         Price = price,
-                        Guid= guid
+                        Guid = guid
                     };
                     VideoAdapters.Add(va);
                 }
@@ -154,11 +225,6 @@ namespace AdMakerM
                         Guid = guid
                     };
                     MemoryOptions.Add(memory);
-                }
-
-                if(doc.Root.Element("ssd_options")!=null)
-                {
-
                 }
 
                 foreach (XElement el in doc.Root.Element("ssd_options").Elements())
@@ -193,6 +259,67 @@ namespace AdMakerM
                         Guid = guid
                     };
                     HDDOptions.Add(hdd);
+                }
+
+
+                //объекты компьютеров собираем в последнюю очередь,
+                //чтобы опции сборки были уже проинициализированы
+                foreach (XElement el in doc.Root.Element("comps").Elements())
+                {
+                    string title = el.Element("title").Value;
+                    string desc = el.Element("desc").Value;
+                    decimal price = (decimal)Double.Parse(el.Element("price").Value);
+                    string guid = (el.Element("guid") == null) ? "" : el.Element("guid").Value;
+
+                    Computer comp = new Computer()
+                    {
+                        Title = title,
+                        Description = desc,
+                        Price = price,
+                        Guid = guid
+                    };
+
+                    if(el.Element("video_adapters")!=null)
+                    {
+                        foreach(XElement vaEl in el.Element("video_adapters").Elements())
+                        {
+                            string guidVa = vaEl.Value;
+                            VideoAdapter va = VideoAdapters.Where(v => v.Guid== guidVa).FirstOrDefault();
+                            comp.VideoAdapters.Add(va);
+                        }
+                    }
+
+                    if (el.Element("memory_options") != null)
+                    {
+                        foreach (XElement vaEl in el.Element("memory_options").Elements())
+                        {
+                            string guidVa = vaEl.Value;
+                            Memory va = MemoryOptions.Where(v => v.Guid == guidVa).FirstOrDefault();
+                            comp.Memories.Add(va);
+                        }
+                    }
+
+                    if (el.Element("ssd_options") != null)
+                    {
+                        foreach (XElement vaEl in el.Element("ssd_options").Elements())
+                        {
+                            string guidVa = vaEl.Value;
+                            SSD va = SSDOptions.Where(v => v.Guid == guidVa).FirstOrDefault();
+                            comp.SSDs.Add(va);
+                        }
+                    }
+
+                    if (el.Element("hdd_options") != null)
+                    {
+                        foreach (XElement vaEl in el.Element("hdd_options").Elements())
+                        {
+                            string guidVa = vaEl.Value;
+                            HDD va = HDDOptions.Where(v => v.Guid == guidVa).FirstOrDefault();
+                            comp.HDDs.Add(va);
+                        }
+                    }
+
+                    Comps.Add(comp);
                 }
 
             }

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Collections.ObjectModel;
 
 namespace AdMakerM
 {
@@ -21,16 +22,30 @@ namespace AdMakerM
     public partial class MainWindow : Window
     {
         Global global;
+
+        
+
         public MainWindow()
         {
             InitializeComponent();
             global = new Global();
+            DataContext = global;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            AddComp f = new AddComp(global);
-            f.Show();
+            AddComp f = new AddComp(global, null);
+            f.ShowDialog();
+
+            //MemoryOptionsColl = f.SelectedMemory;
+            //memoryOptionsDataGrid.ItemsSource = null;
+            //memoryOptionsDataGrid.ItemsSource = MemoryOptionsColl;
+            //memoryOptionsDataGrid.Items.Refresh();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            global.Edit(((Button)sender).Tag.ToString());
         }
     }
 }
