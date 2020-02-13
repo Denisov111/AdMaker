@@ -67,6 +67,7 @@ namespace AdMakerM
             XElement ssdOptions = new XElement("ssd_options");
             XElement hddOptions = new XElement("hdd_options");
             XElement processorOptions = new XElement("processor_options");
+            XElement imageOptions = new XElement("image_options");
 
             doc.Add(st);
 
@@ -131,6 +132,17 @@ namespace AdMakerM
                         processorEl.Add(new XElement("guid", guid));
                     }
                     compEl.Add(processorEl);
+                }
+
+                if (comp.ImagesPath != null)
+                {
+                    XElement imagesEl = new XElement("image_options");
+                    foreach (AdImage image in comp.ImagesPath)
+                    {
+                        string path = image.Path;
+                        imagesEl.Add(new XElement("path", path));
+                    }
+                    compEl.Add(imagesEl);
                 }
 
                 comps.Add(compEl);
@@ -378,6 +390,16 @@ namespace AdMakerM
                             string guidPr = processorEl.Value;
                             Processor pr = ProcessorOptions.Where(v => v.Guid == guidPr).FirstOrDefault();
                             if(pr!=null) comp.Processors.Add(pr);
+                        }
+                    }
+
+                    if (el.Element("image_options") != null)
+                    {
+                        foreach (XElement imageEl in el.Element("image_options").Elements())
+                        {
+                            string path = imageEl.Value;
+                            AdImage image = new AdImage() {Path=path };
+                            comp.ImagesPath.Add(image);
                         }
                     }
 

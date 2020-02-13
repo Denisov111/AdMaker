@@ -35,6 +35,7 @@ namespace AdMakerM
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<HDD> HDDs { get; set; } = new ObservableCollection<HDD>();
         public ObservableCollection<SSD> SSDs { get; set; } = new ObservableCollection<SSD>();
+        public ObservableCollection<AdImage> ImagesPath { get; set; } = new ObservableCollection<AdImage>();
         public ObservableCollection<Ad> Ads { get; set; } = new ObservableCollection<Ad>();
 
 

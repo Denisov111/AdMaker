@@ -1,0 +1,40 @@
+﻿<Window x:Class="AdMakerM.Views.AddImages"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdMakerM.Views"
+        mc:Ignorable="d"
+        Title="AddImages" Height="740" Width="1200">
+    <Grid>
+
+        <Grid.Resources>
+            <DataTemplate x:Key="Face">
+                <StackPanel Width="60">
+                    <Image Source="{Binding Path}" Margin="10" />
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+
+        <DataGrid x:Name="processorsDataGrid"
+                  HorizontalAlignment="Left" Height="562" Margin="10,0,0,0" VerticalAlignment="Top" Width="1172" 
+                  ItemsSource="{Binding ImageOptions}"
+                   AutoGenerateColumns="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="0" Header="Акк" CellTemplate="{StaticResource Face}"/>
+                <DataGridTextColumn Binding="{Binding Path}" ClipboardContentBinding="{x:Null}" DisplayIndex="1" Header="Path"/>
+                
+            </DataGrid.Columns>
+            
+        </DataGrid>
+
+        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,580,0,0" VerticalAlignment="Top" Width="513">
+            
+
+            
+            
+            <Button Content="Добавить фото" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
+            <Button Content="Добавить фото в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_1" />
+        </StackPanel>
+    </Grid>
+</Window>

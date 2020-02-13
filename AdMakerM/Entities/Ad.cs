@@ -14,6 +14,9 @@ namespace AdMakerM
         private string title;
         private string description;
 
+
+        public List<string> Guids = new List<string>();
+
         public string Title
         {
             get { return title; }

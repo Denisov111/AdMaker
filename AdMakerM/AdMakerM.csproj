@@ -56,12 +56,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\Ad.cs" />
+    <Compile Include="Entities\AdImage.cs" />
     <Compile Include="Models\Global.cs" />
     <Compile Include="Views\AddComp.xaml.cs">
       <DependentUpon>AddComp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddHDD.xaml.cs">
       <DependentUpon>AddHDD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddImages.xaml.cs">
+      <DependentUpon>AddImages.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddMemory.xaml.cs">
       <DependentUpon>AddMemory.xaml</DependentUpon>
@@ -105,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddHDD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddImages.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

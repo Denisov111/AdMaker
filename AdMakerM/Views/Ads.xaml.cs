@@ -44,8 +44,9 @@ namespace AdMakerM.Views
                     {
                         foreach (VideoAdapter va in comp.VideoAdapters)
                         {
+                            decimal price = ad_.Price + va.Price;
                             string desc = ad_.Description.Replace("{video}", va.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = comp.Price };
+                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = price };
                             CacheAds_.Add(newAd);
                         }
                     }

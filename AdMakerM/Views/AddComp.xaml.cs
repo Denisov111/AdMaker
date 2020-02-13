@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using Microsoft.Win32;
 
 namespace AdMakerM
 {
@@ -31,6 +32,7 @@ namespace AdMakerM
         public ObservableCollection<SSD> SSDOptionsColl { get; set; } = new ObservableCollection<SSD>();
         public ObservableCollection<HDD> HDDOptionsColl { get; set; } = new ObservableCollection<HDD>();
         public ObservableCollection<Processor> ProcessorOptionsColl { get; set; } = new ObservableCollection<Processor>();
+        public ObservableCollection<AdImage> ImageOptionsColl { get; set; } = new ObservableCollection<AdImage>();
         public int Memory { get; set; } = 0;
         public int TDP { get; set; } = 0;
         public decimal Price { get; set; } = 0;
@@ -42,7 +44,6 @@ namespace AdMakerM
             this.global = global;
             DataContext = this;
 
-
             if(comp!=null)
             {
                 editMode = true;
@@ -52,6 +53,7 @@ namespace AdMakerM
                 SSDOptionsColl = comp.SSDs;
                 HDDOptionsColl = comp.HDDs;
                 ProcessorOptionsColl = comp.Processors;
+                ImageOptionsColl = comp.ImagesPath;
             }
             this.comp = comp;
         }
@@ -86,8 +88,13 @@ namespace AdMakerM
             {
                 variantsCount = variantsCount * HDDOptionsColl.Count;
             }
-            
+            if (ProcessorOptionsColl.Count != 0)
+            {
+                variantsCount = variantsCount * ProcessorOptionsColl.Count;
+            }
+
             variantsLabel.Content = variantsCount.ToString();
+            photoCountLabel.Content = comp.ImagesPath.Count.ToString();
         }
 
         private void AddCompButton_Click(object sender, RoutedEventArgs e)
@@ -95,6 +102,12 @@ namespace AdMakerM
             if(editMode)
             {
                 comp.Price = Price;
+                comp.VideoAdapters = VideoAdaptersColl;
+                comp.Memories = MemoryOptionsColl;
+                comp.SSDs = SSDOptionsColl;
+                comp.HDDs = HDDOptionsColl;
+                comp.Processors = ProcessorOptionsColl;
+                comp.ImagesPath = ImageOptionsColl;
                 global.SaveAll();
             }
             else
@@ -164,6 +177,22 @@ namespace AdMakerM
             processorOptionsDataGrid.ItemsSource = null;
             processorOptionsDataGrid.ItemsSource = ProcessorOptionsColl;
             processorOptionsDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            Views.AddImages f = new Views.AddImages(global, comp);
+            f.ShowDialog();
+            ImageOptionsColl = comp.ImagesPath;
+            imageOptionsDataGrid.ItemsSource = null;
+            imageOptionsDataGrid.ItemsSource = ImageOptionsColl;
+            imageOptionsDataGrid.Items.Refresh();
             ShowVariants();
         }
     }
