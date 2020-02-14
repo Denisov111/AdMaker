@@ -47,6 +47,7 @@ namespace AdMakerM.Views
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Image"; // Default file name
+            dlg.Multiselect = true;
             //dlg.DefaultExt = ".txt"; // Default file extension
             //dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
 
@@ -57,8 +58,13 @@ namespace AdMakerM.Views
             if (result == true)
             {
                 // Open document
-                string filename = dlg.FileName;
-                comp.ImagesPath.Add(new AdImage() { Path=filename});
+                //string filename = dlg.FileName;
+                
+
+                foreach(string fileName in dlg.FileNames)
+                {
+                    comp.ImagesPath.Add(new AdImage() { Path = fileName });
+                }
             }
         }
 

@@ -23,11 +23,13 @@ namespace AdMakerM.Views
         public ObservableCollection<Ad> Ads_ { get; set; } = new ObservableCollection<Ad>();
         ObservableCollection<Ad> CacheAds_ { get; set; } = new ObservableCollection<Ad>();
         Global global;
+        Computer comp;
 
         public Ads(Global global, Computer comp)
         {
             InitializeComponent();
             this.global = global;
+            this.comp = comp;
             DataContext = this;
 
             //если объявления ещё не генерились, то генерим
@@ -60,8 +62,9 @@ namespace AdMakerM.Views
                     {
                         foreach (Memory mem in comp.Memories)
                         {
+                            decimal price = ad_.Price + mem.Price;
                             string desc = ad_.Description.Replace("{memory}", mem.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = comp.Price };
+                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = price };
                             CacheAds_.Add(newAd);
                         }
                     }
@@ -75,8 +78,9 @@ namespace AdMakerM.Views
                     {
                         foreach (HDD hdd in comp.HDDs)
                         {
+                            decimal price = ad_.Price + hdd.Price;
                             string desc = ad_.Description.Replace("{hdd}", hdd.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = comp.Price };
+                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = price };
                             CacheAds_.Add(newAd);
                         }
                     }
@@ -90,8 +94,9 @@ namespace AdMakerM.Views
                     {
                         foreach (SSD ssd in comp.SSDs)
                         {
+                            decimal price = ad_.Price + ssd.Price;
                             string desc = ad_.Description.Replace("{ssd}", ssd.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = comp.Price };
+                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = price };
                             CacheAds_.Add(newAd);
                         }
                     }
@@ -105,18 +110,44 @@ namespace AdMakerM.Views
                     {
                         foreach (Processor processor in comp.Processors)
                         {
+                            decimal price = ad_.Price + processor.Price;
                             string desc = ad_.Description.Replace("{processor}", processor.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = comp.Price };
+                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = price };
                             CacheAds_.Add(newAd);
                         }
                     }
                 }
                 Ads_ = (CacheAds_.Count > 0) ? CacheAds_ : Ads_;
 
+                //добавляем фото
+                for(int i=0;i<comp.ImagesPath.Count && i< Ads_.Count; i++)
+                {
+                    Ads_[i].ImgFileName = comp.ImagesPath[i].Path;
+                }
+
+                //добавляем фото
+                for (int i = 0; i <  Ads_.Count; i++)
+                {
+                    Ads_[i].Description = Randomizator.ParseSpintax(Ads_[i].Description);
+                    Ads_[i].Title = Randomizator.ParseSpintax(Ads_[i].Title);
+                }
+
+
                 comp.Ads = Ads_;
             }
             adsDataGrid.ItemsSource = comp.Ads;
             adsDataGrid.Items.Refresh();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            for(int i=0;i<comp.Ads.Count;i++)
+            {
+                if(comp.Ads[i].Articul==0)
+                    comp.Ads[i].SetArticul();
+            }
+            global.SaveAll();
+            Close();
         }
     }
 }

@@ -5,23 +5,56 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMakerM.Views"
         mc:Ignorable="d"
-        Title="Ads" Height="450" Width="800">
+        Title="Ads" Height="450" Width="1071">
     <Grid>
-        <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Left" Height="319" Margin="0,53,0,0" VerticalAlignment="Top" Width="782"
+        <Grid.Resources>
+            <DataTemplate x:Key="Face">
+                <StackPanel Width="60">
+                    <Image Source="{Binding ImgFileName}" Margin="5" />
+                </StackPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="Options">
+                <StackPanel Width="300" Orientation="Horizontal">
+                    <StackPanel Width="50">
+                        <Label Content="Юла"/>
+                        <Label Content="Авито"/>
+                        <Label Content="Au"/>
+                    </StackPanel>
+                    <StackPanel Width="50">
+                        <CheckBox IsChecked="{Binding IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel Width="200">
+                        <TextBox Text="{Binding LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding LinkOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Text="{Binding LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </StackPanel>
+            </DataTemplate>
+        </Grid.Resources>
+        
+        <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Stretch"  Margin="0,53,0,0" VerticalAlignment="Stretch"
                   ItemsSource="{Binding Local.Ads_}"
-                  AutoGenerateColumns="False"   CanUserAddRows="False">
+                  AutoGenerateColumns="False"   CanUserAddRows="False"
+                  ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="500" DisplayIndex="1" ClipboardContentBinding="{x:Null}">
+                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="0" Header="Photo" CellTemplate="{StaticResource Face}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Art." Binding="{Binding Articul}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="500" DisplayIndex="3" ClipboardContentBinding="{x:Null}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="4" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="5" Header="Options" CellTemplate="{StaticResource Options}"/>
+                <DataGridTextColumn Header="ImgFileName" Binding="{Binding ImgFileName}" DisplayIndex="6" ClipboardContentBinding="{x:Null}" Width="250"/>
             </DataGrid.Columns>
         </DataGrid>
+        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Window>

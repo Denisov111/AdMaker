@@ -54,6 +54,8 @@ namespace AdMakerM
                 HDDOptionsColl = comp.HDDs;
                 ProcessorOptionsColl = comp.Processors;
                 ImageOptionsColl = comp.ImagesPath;
+                AdTitle = comp.Title;
+                AdDesc = comp.Description;
             }
             this.comp = comp;
         }
@@ -108,6 +110,8 @@ namespace AdMakerM
                 comp.HDDs = HDDOptionsColl;
                 comp.Processors = ProcessorOptionsColl;
                 comp.ImagesPath = ImageOptionsColl;
+                comp.Title = AdTitle;
+                comp.Description = AdDesc;
                 global.SaveAll();
             }
             else

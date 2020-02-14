@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace AdMakerM
 {
     public class Global
     {
+        public static Random rnd = new Random();
         string storeFile = @"store.xml";
 
         public ObservableCollection<Computer> Comps { get; set; } = new ObservableCollection<Computer>();
@@ -145,6 +147,39 @@ namespace AdMakerM
                     compEl.Add(imagesEl);
                 }
 
+                if (comp.Ads != null)
+                {
+                    XElement adsEl = new XElement("ads");
+                    foreach (Ad ad in comp.Ads)
+                    {
+                        string articul = ad.Articul.ToString();
+                        string description = ad.Description;
+                        string imgFileName = ad.ImgFileName;
+                        string isPostedOnAu = ad.IsPostedOnAu.ToString();
+                        string isPostedOnAvito = ad.IsPostedOnAvito.ToString();
+                        string isPostedOnUla = ad.IsPostedOnUla.ToString();
+                        string linkOnAu = ad.LinkOnAu;
+                        string linkOnAvito = ad.LinkOnAvito;
+                        string linkOnUla = ad.LinkOnUla;
+                        string price = ad.Price.ToString();
+                        string title = ad.Title;
+
+                        adsEl.Add(new XElement("ad",
+                            new XElement("articul", articul),
+                            new XElement("title", title),
+                            new XElement("description", description),
+                            new XElement("price", price),
+                            new XElement("img_file_name", imgFileName),
+                            new XElement("is_posted_on_au", isPostedOnAu),
+                            new XElement("is_posted_on_avito", isPostedOnAvito),
+                            new XElement("is_posted_on_ula", isPostedOnUla),
+                            new XElement("link_on_au", linkOnAu),
+                            new XElement("link_on_avito", linkOnAvito),
+                            new XElement("link_on_ula", linkOnUla))); ;
+                    }
+                    compEl.Add(adsEl);
+                }
+
                 comps.Add(compEl);
 
             }
@@ -213,6 +248,10 @@ namespace AdMakerM
             doc.Root.Add(processorOptions);
 
             doc.Save(storeFile);
+
+            Int32 unixTimestamp = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            string backupFile = "backup/" + unixTimestamp + "_backup";
+            doc.Save(backupFile);
         }
 
         private void InitStore()
@@ -400,6 +439,45 @@ namespace AdMakerM
                             string path = imageEl.Value;
                             AdImage image = new AdImage() {Path=path };
                             comp.ImagesPath.Add(image);
+                        }
+                    }
+
+                    if (el.Element("ads") != null)
+                    {
+                        foreach (XElement adEl in el.Element("ads").Elements())
+                        {
+                            int articul = Int32.Parse( adEl.Element("articul").Value); 
+                            string description = adEl.Element("description").Value;
+                            string imgFileName = adEl.Element("img_file_name").Value;
+                            bool isPostedOnAu = bool.Parse( adEl.Element("is_posted_on_au").Value);
+                            bool isPostedOnAvito = bool.Parse(adEl.Element("is_posted_on_avito").Value);
+                            bool isPostedOnUla = bool.Parse(adEl.Element("is_posted_on_ula").Value);
+                            string linkOnAu = adEl.Element("link_on_au").Value;
+                            string linkOnAvito = adEl.Element("link_on_avito").Value;
+                            string linkOnUla = adEl.Element("link_on_ula").Value;
+                            decimal price_ = Decimal.Parse(adEl.Element("price").Value);
+                            string title_ = adEl.Element("title").Value;
+                            //string path = imageEl.Value;
+                            //AdImage image = new AdImage() { Path = path };
+                            //comp.ImagesPath.Add(image);
+
+                            Ad ad = new Ad()
+                            {
+                                Articul=articul,
+                                Description =description,
+                                ImgFileName=imgFileName,
+                                IsPostedOnAu=isPostedOnAu,
+                                IsPostedOnAvito=isPostedOnAvito,
+                                IsPostedOnUla=isPostedOnUla,
+                                LinkOnAu = linkOnAu,
+                                LinkOnAvito=linkOnAvito,
+                                LinkOnUla=linkOnUla,
+                                Price=price_,
+                                Title = title_
+
+                            };
+
+                            comp.Ads.Add(ad);
                         }
                     }
 

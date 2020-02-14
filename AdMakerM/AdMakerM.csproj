@@ -58,6 +58,7 @@
     <Compile Include="Entities\Ad.cs" />
     <Compile Include="Entities\AdImage.cs" />
     <Compile Include="Models\Global.cs" />
+    <Compile Include="Models\Randomizator.cs" />
     <Compile Include="Views\AddComp.xaml.cs">
       <DependentUpon>AddComp.xaml</DependentUpon>
     </Compile>

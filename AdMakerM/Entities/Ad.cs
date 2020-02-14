@@ -8,12 +8,20 @@ using System.Runtime.CompilerServices;
 
 namespace AdMakerM
 {
+    [Serializable]
     public class Ad : INotifyPropertyChanged
     {
         private decimal price;
         private string title;
         private string description;
-
+        string imgFileName;
+        int articul;
+        bool isPostedOnUla;
+        bool isPostedOnAvito;
+        bool isPostedOnAu;
+        string linkOnUla;
+        string linkOnAvito;
+        string linkOnAu;
 
         public List<string> Guids = new List<string>();
 
@@ -41,11 +49,104 @@ namespace AdMakerM
             set
             {
                 price = value;
-                OnPropertyChanged("Price");
+                OnPropertyChanged();
             }
         }
-        public string ImgFileName { get; set; }
+        public string ImgFileName
+        {
+            get { return imgFileName; }
+            set
+            {
+                imgFileName = value;
+                OnPropertyChanged();
+            }
+        }
+        public int Articul
+        {
+            get { return articul; }
+            set
+            {
+                articul = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public bool IsPostedOnUla
+        {
+            get { return isPostedOnUla; }
+            set
+            {
+                isPostedOnUla = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsPostedOnAvito
+        {
+            get { return isPostedOnAvito; }
+            set
+            {
+                isPostedOnAvito = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsPostedOnAu
+        {
+            get { return isPostedOnAu; }
+            set
+            {
+                isPostedOnAu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkOnUla
+        {
+            get { return linkOnUla; }
+            set
+            {
+                linkOnUla = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkOnAvito
+        {
+            get { return linkOnAvito; }
+            set
+            {
+                linkOnAvito = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkOnAu
+        {
+            get { return linkOnAu; }
+            set
+            {
+                linkOnAu = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        public Ad()
+        {
+        }
+
+        public void SetArticul()
+        {
+            Articul = CreateArticul();
+        }
+
+        private int CreateArticul()
+        {
+            Properties.Settings.Default.Articul = Properties.Settings.Default.Articul + 1;
+            Properties.Settings.Default.Save();
+            return Properties.Settings.Default.Articul;
+        }
 
         #region INotifyPropertyChanged code
 
