@@ -19,9 +19,12 @@ namespace AdMakerM.Views
     /// </summary>
     public partial class AdCard : Window
     {
-        public AdCard()
+        Ad ad;
+        public AdCard(Ad ad)
         {
             InitializeComponent();
+            this.ad = ad;
+            DataContext = this;
         }
     }
 }

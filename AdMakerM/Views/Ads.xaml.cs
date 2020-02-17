@@ -215,6 +215,9 @@ namespace AdMakerM.Views
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             string tag = ((Button)sender).Tag.ToString();
+            Ad ad = Ads_.Where(a=>a.Articul.ToString()==tag.ToString()).FirstOrDefault();
+            Views.AdCard f = new AdCard(ad);
+            f.ShowDialog();
         }
     }
 }
