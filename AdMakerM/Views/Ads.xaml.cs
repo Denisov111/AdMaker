@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace AdMakerM.Views
 {
@@ -123,9 +124,9 @@ namespace AdMakerM.Views
                 for(int i=0;i<comp.ImagesPath.Count && i< Ads_.Count; i++)
                 {
                     Ads_[i].ImgFileName = comp.ImagesPath[i].Path;
+                    Ads_[i].IconFileName = comp.ImagesPath[i].IconPath;
                 }
 
-                //добавляем фото
                 for (int i = 0; i <  Ads_.Count; i++)
                 {
                     Ads_[i].Description = Randomizator.ParseSpintax(Ads_[i].Description);
@@ -144,10 +145,76 @@ namespace AdMakerM.Views
             for(int i=0;i<comp.Ads.Count;i++)
             {
                 if(comp.Ads[i].Articul==0)
+                {
                     comp.Ads[i].SetArticul();
+                }
+                    
             }
             global.SaveAll();
             Close();
+        }
+
+        async private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            string currentDir = Directory.GetCurrentDirectory();
+            if (!Directory.Exists("modimages"))
+            {
+                Directory.CreateDirectory("modimages");
+            }
+            for (int i = 0; i < comp.Ads.Count; i++)
+            {
+                string imagePath = comp.Ads[i].ImgFileName;
+                string newFileName = "modimages\\" + comp.Ads[i].Articul.ToString() + ".jpg";
+                string newPath = System.IO.Path.Combine(currentDir, newFileName);
+                if(!String.IsNullOrWhiteSpace(imagePath))
+                {
+                    try
+                    {
+                        imageEditorImage.Source = await ImageEditor.EditImage(imagePath, newPath);
+                        comp.Ads[i].ModImgFileName = newPath;
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                    }
+                    
+                }
+                
+                //if (comp.Ads[i].Articul == 0)
+                //{
+                //    comp.Ads[i].SetArticul();
+                //}
+
+            }
+            global.SaveAll();
+        }
+
+        async private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string currentDir = Directory.GetCurrentDirectory();
+            if (!Directory.Exists("icons"))
+            {
+                Directory.CreateDirectory("icons");
+            }
+
+            for (int i = 0; i < comp.Ads.Count; i++)
+            {
+                if(String.IsNullOrWhiteSpace(comp.Ads[i].IconFileName))
+                {
+                    
+                    string fileName_ = System.IO.Path.GetFileName(comp.Ads[i].ImgFileName);
+                    string newFileName = "icons\\icon_" + fileName_;
+                    string newPath = System.IO.Path.Combine(currentDir, newFileName);
+                    await ImageEditor.EditImage(comp.Ads[i].ImgFileName, newPath, 100);
+                    comp.Ads[i].IconFileName = newPath;
+                }
+            }
+
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            string tag = ((Button)sender).Tag.ToString();
         }
     }
 }

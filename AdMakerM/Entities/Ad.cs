@@ -15,6 +15,8 @@ namespace AdMakerM
         private string title;
         private string description;
         string imgFileName;
+        string modImgFileName;
+        string iconFileName;
         int articul;
         bool isPostedOnUla;
         bool isPostedOnAvito;
@@ -58,6 +60,24 @@ namespace AdMakerM
             set
             {
                 imgFileName = value;
+                OnPropertyChanged();
+            }
+        }
+        public string ModImgFileName
+        {
+            get { return modImgFileName; }
+            set
+            {
+                modImgFileName = value;
+                OnPropertyChanged();
+            }
+        }
+        public string IconFileName
+        {
+            get { return iconFileName; }
+            set
+            {
+                iconFileName = value;
                 OnPropertyChanged();
             }
         }

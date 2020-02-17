@@ -11,7 +11,8 @@
         <Grid.Resources>
             <DataTemplate x:Key="Face">
                 <StackPanel Width="60">
-                    <Image Source="{Binding Path}" Margin="10" />
+                    <Image Source="{Binding IconPath}" Margin="10" />
+                    <Label Content="{Binding IconPath}"/>
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>

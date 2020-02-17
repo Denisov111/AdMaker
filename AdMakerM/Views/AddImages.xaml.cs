@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace AdMakerM.Views
 {
@@ -43,7 +44,7 @@ namespace AdMakerM.Views
             //}
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        async private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.FileName = "Image"; // Default file name
@@ -63,7 +64,28 @@ namespace AdMakerM.Views
 
                 foreach(string fileName in dlg.FileNames)
                 {
-                    comp.ImagesPath.Add(new AdImage() { Path = fileName });
+                    AdImage adImage = new AdImage() { Path = fileName };
+                    try
+                    {
+                        string currentDir = Directory.GetCurrentDirectory();
+                        if (!Directory.Exists("icons"))
+                        {
+                            Directory.CreateDirectory("icons");
+                        }
+                        string fileName_ = System.IO.Path.GetFileName(fileName);
+                        string newFileName = "icons\\icon_" + fileName_;
+                        string newPath = System.IO.Path.Combine(currentDir, newFileName);
+                        await ImageEditor.EditImage(fileName, newPath, 100);
+                        adImage.IconPath = newPath;
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        await Task.Delay(100);
+                    }
+                    comp.ImagesPath.Add(adImage);
+                    await Task.Delay(10);
+
                 }
             }
         }

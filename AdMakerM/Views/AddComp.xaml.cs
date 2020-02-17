@@ -58,6 +58,8 @@ namespace AdMakerM
                 AdDesc = comp.Description;
             }
             this.comp = comp;
+            if (this.comp == null) this.comp = new Computer();
+            ShowVariants();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -96,7 +98,8 @@ namespace AdMakerM
             }
 
             variantsLabel.Content = variantsCount.ToString();
-            photoCountLabel.Content = comp.ImagesPath.Count.ToString();
+            if(comp!=null)
+                photoCountLabel.Content = comp.ImagesPath.Count.ToString();
         }
 
         private void AddCompButton_Click(object sender, RoutedEventArgs e)

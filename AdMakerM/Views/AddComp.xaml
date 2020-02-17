@@ -10,8 +10,8 @@
 
         <Grid.Resources>
             <DataTemplate x:Key="Face">
-                <StackPanel Width="60">
-                    <Image Source="{Binding Path}" Margin="10" />
+                <StackPanel Width="110">
+                    <Image Source="{Binding IconPath}" Margin="10" />
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>
@@ -27,7 +27,7 @@
             <!--<TextBox Height="104" TextWrapping="Wrap" 
                      Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox x:Name="descTextBox" Height="104" TextWrapping="Wrap" 
-                     Text="{Binding AdDesc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding AdDesc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
             <StackPanel Height="30" Orientation="Horizontal">
                 <Button Content="video" Click="Button_Click_2"/>
                 <Button Content="memory" Click="Button_Click_2"/>

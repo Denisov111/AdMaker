@@ -33,7 +33,7 @@
             HorizontalAlignment="Left" Height="399" Margin="148,10,0,0" VerticalAlignment="Top" Width="802"
                   ItemsSource="{Binding Comps}" AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}" Width="150"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" DisplayIndex="1" Width="400" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Guid" Binding="{Binding Guid}" Width="50" DisplayIndex="3" ClipboardContentBinding="{x:Null}"/>

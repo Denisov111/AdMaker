@@ -28,7 +28,11 @@ namespace AdMakerM
 
         public override string ToString()
         {
-            return Title + " " + Volume + " Гб";
+            if(!String.IsNullOrWhiteSpace(Title))
+                return Title + " " + Volume + " Гб";
+            else
+                return Volume + " Гб";
+
         }
 
         public Memory Clone()

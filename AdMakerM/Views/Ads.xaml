@@ -9,32 +9,35 @@
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="Face">
-                <StackPanel Width="60">
-                    <Image Source="{Binding ImgFileName}" Margin="5" />
+                <StackPanel Width="110">
+                    <Image Source="{Binding IconFileName}" Margin="5" />
                 </StackPanel>
             </DataTemplate>
             <DataTemplate x:Key="Options">
-                <StackPanel Width="300" Orientation="Horizontal">
-                    <StackPanel Width="50">
-                        <Label Content="Юла"/>
-                        <Label Content="Авито"/>
-                        <Label Content="Au"/>
+                <StackPanel Width="300">
+                    <StackPanel Width="300" Orientation="Horizontal">
+                        <Label Content="Юла" Width="50"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="20"/>
+                        <TextBox Text="{Binding LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="250"/>
                     </StackPanel>
-                    <StackPanel Width="50">
-                        <CheckBox IsChecked="{Binding IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <CheckBox IsChecked="{Binding IsPostedOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <CheckBox IsChecked="{Binding IsPostedOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Width="300" Orientation="Horizontal">
+                        <Label Content="Авито" Width="50"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
+                        <TextBox Text="{Binding LinkOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
                     </StackPanel>
-                    <StackPanel Width="200">
-                        <TextBox Text="{Binding LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Text="{Binding LinkOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBox Text="{Binding LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Width="300" Orientation="Horizontal">
+                        <Label Content="Au" Width="50"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
+                        <TextBox Text="{Binding LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                    </StackPanel>
+                    <StackPanel Width="300" Orientation="Horizontal">
+                        <Button Content="Карточка объявления" Click="Button_Click_3" Tag="{Binding Articul}"/>
                     </StackPanel>
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>
         
-        <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Stretch"  Margin="0,53,0,0" VerticalAlignment="Stretch"
+        <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Stretch"  Margin="0,148,0,0" VerticalAlignment="Stretch"
                   ItemsSource="{Binding Local.Ads_}"
                   AutoGenerateColumns="False"   CanUserAddRows="False"
                   ScrollViewer.CanContentScroll="False">
@@ -42,7 +45,7 @@
                 <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="0" Header="Photo" CellTemplate="{StaticResource Face}"/>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Art." Binding="{Binding Articul}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="500" DisplayIndex="3" ClipboardContentBinding="{x:Null}">
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300" DisplayIndex="3" ClipboardContentBinding="{x:Null}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -51,10 +54,14 @@
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="4" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="5" Header="Options" CellTemplate="{StaticResource Options}"/>
-                <DataGridTextColumn Header="ImgFileName" Binding="{Binding ImgFileName}" DisplayIndex="6" ClipboardContentBinding="{x:Null}" Width="250"/>
+                <DataGridTextColumn Header="ImgFileName" Binding="{Binding ImgFileName}" DisplayIndex="6" ClipboardContentBinding="{x:Null}" Width="150"/>
+                <DataGridTextColumn Header="ModImgFileName" Binding="{Binding ModImgFileName}" DisplayIndex="7" ClipboardContentBinding="{x:Null}" Width="250"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <Button Content="Преобразовать все фото" HorizontalAlignment="Left" Margin="99,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
+        <Image x:Name="imageEditorImage" HorizontalAlignment="Left" Height="134" Margin="432,9,0,0" VerticalAlignment="Top" Width="192"/>
+        <Button Content="Создать иконки" HorizontalAlignment="Left" Margin="268,10,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click_2"/>
 
     </Grid>
 </Window>
