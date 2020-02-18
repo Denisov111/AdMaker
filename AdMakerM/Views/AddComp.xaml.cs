@@ -32,6 +32,9 @@ namespace AdMakerM
         public ObservableCollection<SSD> SSDOptionsColl { get; set; } = new ObservableCollection<SSD>();
         public ObservableCollection<HDD> HDDOptionsColl { get; set; } = new ObservableCollection<HDD>();
         public ObservableCollection<Processor> ProcessorOptionsColl { get; set; } = new ObservableCollection<Processor>();
+        public ObservableCollection<Motherboard> MBOptionsColl { get; set; } = new ObservableCollection<Motherboard>();
+        public ObservableCollection<Case> CaseOptionsColl { get; set; } = new ObservableCollection<Case>();
+        public ObservableCollection<ProcessorCooler> CPUCoolerOptionsColl { get; set; } = new ObservableCollection<ProcessorCooler>();
         public ObservableCollection<AdImage> ImageOptionsColl { get; set; } = new ObservableCollection<AdImage>();
         public int Memory { get; set; } = 0;
         public int TDP { get; set; } = 0;
@@ -200,6 +203,39 @@ namespace AdMakerM
             imageOptionsDataGrid.ItemsSource = null;
             imageOptionsDataGrid.ItemsSource = ImageOptionsColl;
             imageOptionsDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            Views.AddMama f = new Views.AddMama(global);
+            f.ShowDialog();
+            MBOptionsColl = f.SelectedMB;
+            mamaOptionsDataGrid.ItemsSource = null;
+            mamaOptionsDataGrid.ItemsSource = MBOptionsColl;
+            mamaOptionsDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            Views.AddCase f = new Views.AddCase(global);
+            f.ShowDialog();
+            CaseOptionsColl = f.SelectedCase;
+            caseOptionsDataGrid.ItemsSource = null;
+            caseOptionsDataGrid.ItemsSource = CaseOptionsColl;
+            caseOptionsDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            Views.AddCPUCooler f = new Views.AddCPUCooler(global);
+            f.ShowDialog();
+            CPUCoolerOptionsColl = f.SelectedCPUCooler;
+            cpuCoolerOptionsDataGrid.ItemsSource = null;
+            cpuCoolerOptionsDataGrid.ItemsSource = CPUCoolerOptionsColl;
+            cpuCoolerOptionsDataGrid.Items.Refresh();
             ShowVariants();
         }
     }

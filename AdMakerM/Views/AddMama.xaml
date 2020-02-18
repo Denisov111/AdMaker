@@ -1,21 +1,21 @@
-﻿<Window x:Class="AdMakerM.Views.AddProcessor"
+﻿<Window x:Class="AdMakerM.Views.AddMama"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMakerM.Views"
         mc:Ignorable="d"
-        Title="AddProcessor" Height="800" Width="1200">
+        Title="AddMama" Height="800" Width="1200">
     <Grid>
-        <DataGrid x:Name="processorsDataGrid"
+        <DataGrid x:Name="mbDataGrid"
                   HorizontalAlignment="Left" Height="562" Margin="10,0,0,0" VerticalAlignment="Top" Width="1172" 
-                  ItemsSource="{Binding ProcessorOptions}"
+                  ItemsSource="{Binding MBOptions}"
                   AutoGenerateColumns="False" CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Socket" Binding="{Binding Socket}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
-                
+
             </DataGrid.Columns>
 
         </DataGrid>
@@ -23,9 +23,10 @@
         <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,580,0,0" VerticalAlignment="Top" Width="513">
             <StackPanel  Orientation="Horizontal">
                 <Label Content="Название" Width="117"/>
-                <TextBox x:Name="ProcessorTitleTextBox" Height="22" TextWrapping="Wrap"  Width="117" Text="{Binding Local.ProcessorTitle}"/>
+                <TextBox Height="22" TextWrapping="Wrap"  Width="117" 
+                         Text="{Binding Local.MBTitle}"/>
             </StackPanel>
-            
+
             <StackPanel  Orientation="Horizontal">
                 <Label Content="Тип" Width="117"/>
                 <ComboBox x:Name="processorSocketComboBox" Width="120" SelectedIndex="0"/>
@@ -35,8 +36,8 @@
                 <Label Content="Цена" Width="117"/>
                 <TextBox Height="22" TextWrapping="Wrap" Width="117" Text="{Binding Local.Price}"/>
             </StackPanel>
-            <Button Content="Добавить проц на склад" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
-            <Button Content="Добавить проц в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_1" />
+            <Button Content="Добавить мать на склад" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
+            <Button Content="Добавить мать в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_1" />
         </StackPanel>
     </Grid>
 </Window>

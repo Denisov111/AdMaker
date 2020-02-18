@@ -28,7 +28,8 @@ namespace AdMakerM
         public MainWindow()
         {
             InitializeComponent();
-            global = new Global();
+
+            global = new Global(null);
             DataContext = global;
         }
 

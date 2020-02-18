@@ -15,7 +15,11 @@ namespace AdMakerM
         PowerSupply,
         Processor,
         SSD,
-        VideoAdapter
+        VideoAdapter,
+        Motherboard,
+        Case,
+        ProcessorCooler,
+        CaseCooler
     }
 
     public interface IProduct

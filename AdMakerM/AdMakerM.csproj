@@ -59,20 +59,33 @@
     </ApplicationDefinition>
     <Compile Include="Entities\Ad.cs" />
     <Compile Include="Entities\AdImage.cs" />
+    <Compile Include="Entities\Case.cs" />
+    <Compile Include="Entities\Motherboard.cs" />
+    <Compile Include="Entities\ProcessorCooler.cs" />
     <Compile Include="Models\Global.cs" />
+    <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\ImageEditor.cs" />
     <Compile Include="Models\Randomizator.cs" />
     <Compile Include="Views\AdCard.xaml.cs">
       <DependentUpon>AdCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddCase.xaml.cs">
+      <DependentUpon>AddCase.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddComp.xaml.cs">
       <DependentUpon>AddComp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddCPUCooler.xaml.cs">
+      <DependentUpon>AddCPUCooler.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddHDD.xaml.cs">
       <DependentUpon>AddHDD.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddImages.xaml.cs">
       <DependentUpon>AddImages.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddMama.xaml.cs">
+      <DependentUpon>AddMama.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddMemory.xaml.cs">
       <DependentUpon>AddMemory.xaml</DependentUpon>
@@ -115,7 +128,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddCase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddComp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddCPUCooler.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -124,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddImages.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddMama.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
