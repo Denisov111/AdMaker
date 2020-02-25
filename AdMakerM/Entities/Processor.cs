@@ -16,6 +16,7 @@ namespace AdMakerM
         public ProductType ProductType { get => ProductType.Processor; }
         public string Guid { get; set; }
         public string Title { get; set; }
+        public string Template { get; } = "{power}";
         public string Description { get; set; }
         public int TDP { get; set; }
         public decimal Price { get; set; }
@@ -26,7 +27,7 @@ namespace AdMakerM
 
         public override string ToString()
         {
-            return Title + " " + Socket.ToString();
+            return Title;
         }
 
         public Processor Clone()

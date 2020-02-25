@@ -66,6 +66,10 @@ namespace AdMakerM
             StatusString = "Соотношение: " + (decimal)neededWith / (decimal)width;
 
             Bitmap resultImg = new Bitmap(img, new Size(neededWith, resultHeight));
+            if(File.Exists(newFileName))
+            {
+                File.Delete(newFileName);
+            }
 
             resultImg.Save(newFileName, System.Drawing.Imaging.ImageFormat.Jpeg);
             await Task.Delay(1);

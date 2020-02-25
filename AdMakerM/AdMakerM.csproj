@@ -90,6 +90,9 @@
     <Compile Include="Views\AddMemory.xaml.cs">
       <DependentUpon>AddMemory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPower.xaml.cs">
+      <DependentUpon>AddPower.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddProcessor.xaml.cs">
       <DependentUpon>AddProcessor.xaml</DependentUpon>
     </Compile>
@@ -153,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddMemory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddPower.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

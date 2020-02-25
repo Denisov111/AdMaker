@@ -25,6 +25,7 @@ namespace AdMakerM
         public ObservableCollection<Motherboard> MBOptions { get; set; } = new ObservableCollection<Motherboard>();
         public ObservableCollection<Case> CaseOptions { get; set; } = new ObservableCollection<Case>();
         public ObservableCollection<ProcessorCooler> CPUCoolerOptions { get; set; } = new ObservableCollection<ProcessorCooler>();
+        public ObservableCollection<PowerSupply> PowerOptions { get; set; } = new ObservableCollection<PowerSupply>();
 
 
         //Для сериализации пустой конструктор
@@ -44,6 +45,7 @@ namespace AdMakerM
             MBOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             CaseOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             CPUCoolerOptions.CollectionChanged += VideoAdapters_CollectionChanged;
+            PowerOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             Comps.CollectionChanged+= VideoAdapters_CollectionChanged;
         }
 
@@ -328,17 +330,25 @@ namespace AdMakerM
 
         private void InitStore()
         {
-            XmlSerializer formatterGlobal = new XmlSerializer(typeof(Global));
-            using (FileStream fs = new FileStream("global.xml", FileMode.OpenOrCreate))
+            if(File.Exists("global.xml"))
             {
-                var gl = (Global)formatterGlobal.Deserialize(fs);
-                Comps = gl.Comps;
-                VideoAdapters = gl.VideoAdapters;
-                MemoryOptions = gl.MemoryOptions;
-                SSDOptions = gl.SSDOptions;
-                HDDOptions = gl.HDDOptions;
-                ProcessorOptions = gl.ProcessorOptions;
+                XmlSerializer formatterGlobal = new XmlSerializer(typeof(Global));
+                using (FileStream fs = new FileStream("global.xml", FileMode.OpenOrCreate))
+                {
+                    var gl = (Global)formatterGlobal.Deserialize(fs);
+                    Comps = gl.Comps;
+                    VideoAdapters = gl.VideoAdapters;
+                    MemoryOptions = gl.MemoryOptions;
+                    SSDOptions = gl.SSDOptions;
+                    HDDOptions = gl.HDDOptions;
+                    ProcessorOptions = gl.ProcessorOptions;
+                    MBOptions = gl.MBOptions;
+                    CaseOptions = gl.CaseOptions;
+                    CPUCoolerOptions = gl.CPUCoolerOptions;
+                    PowerOptions = gl.PowerOptions;
+                }
             }
+
 
             //XmlSerializer formatter = new XmlSerializer(typeof(ObservableCollection<Computer>));
             //using (FileStream fs = new FileStream("comps.xml", FileMode.OpenOrCreate))

@@ -11,6 +11,7 @@ namespace AdMakerM
         public ProductType ProductType { get => ProductType.Case; }
         public string Guid { get; set; }
         public string Title { get; set; }
+        public string Template { get; } = "{case}";
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }

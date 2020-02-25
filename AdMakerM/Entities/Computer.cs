@@ -12,10 +12,21 @@ namespace AdMakerM
     public class Computer : IProduct , INotifyPropertyChanged
     {
         private decimal price;
+        string internalTitle;
 
         public ProductType ProductType { get => ProductType.Computer; }
         public string Guid { get; set; }
         public string Title { get; set; }
+        public string InternalTitle
+        {
+            get { return internalTitle; }
+            set
+            {
+                internalTitle = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Template { get; }
         public string Description { get; set; }
         public decimal Price
         {
@@ -23,7 +34,7 @@ namespace AdMakerM
             set
             {
                 price = value;
-                OnPropertyChanged("Price");
+                OnPropertyChanged();
             }
         }
         public string ImgFileName { get; set; }
@@ -35,6 +46,9 @@ namespace AdMakerM
         public ObservableCollection<VideoAdapter> VideoAdapters { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<HDD> HDDs { get; set; } = new ObservableCollection<HDD>();
         public ObservableCollection<SSD> SSDs { get; set; } = new ObservableCollection<SSD>();
+        public ObservableCollection<Motherboard> Motherboards { get; set; } = new ObservableCollection<Motherboard>();
+        public ObservableCollection<Case> Cases { get; set; } = new ObservableCollection<Case>();
+        public ObservableCollection<ProcessorCooler> CPUCoolers { get; set; } = new ObservableCollection<ProcessorCooler>();
         public ObservableCollection<AdImage> ImagesPath { get; set; } = new ObservableCollection<AdImage>();
         public ObservableCollection<Ad> Ads { get; set; } = new ObservableCollection<Ad>();
 

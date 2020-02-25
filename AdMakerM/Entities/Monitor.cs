@@ -10,6 +10,7 @@ namespace AdMakerM
     {
         public ProductType ProductType { get => ProductType.Computer; }
         public string Title { get; set; }
+        public string Template { get; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }

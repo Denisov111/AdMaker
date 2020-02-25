@@ -27,6 +27,7 @@ namespace AdMakerM
 
         public string AdTitle { get; set; } = "Игровой ПК ";
         public string AdDesc { get; set; } = "Игровой ПК ";
+        public string InternalTitle { get; set; } = "Внутреннее описание";
         public ObservableCollection<VideoAdapter> VideoAdaptersColl { get; set; } = new ObservableCollection<VideoAdapter>();
         public ObservableCollection<Memory> MemoryOptionsColl { get; set; } = new ObservableCollection<Memory>();
         public ObservableCollection<SSD> SSDOptionsColl { get; set; } = new ObservableCollection<SSD>();
@@ -35,11 +36,12 @@ namespace AdMakerM
         public ObservableCollection<Motherboard> MBOptionsColl { get; set; } = new ObservableCollection<Motherboard>();
         public ObservableCollection<Case> CaseOptionsColl { get; set; } = new ObservableCollection<Case>();
         public ObservableCollection<ProcessorCooler> CPUCoolerOptionsColl { get; set; } = new ObservableCollection<ProcessorCooler>();
+        public ObservableCollection<PowerSupply> PowerOptionsColl { get; set; } = new ObservableCollection<PowerSupply>();
         public ObservableCollection<AdImage> ImageOptionsColl { get; set; } = new ObservableCollection<AdImage>();
         public int Memory { get; set; } = 0;
         public int TDP { get; set; } = 0;
         public decimal Price { get; set; } = 0;
-        
+
 
         public AddComp(Global global, Computer comp)
         {
@@ -47,7 +49,7 @@ namespace AdMakerM
             this.global = global;
             DataContext = this;
 
-            if(comp!=null)
+            if (comp != null)
             {
                 editMode = true;
                 Price = comp.Price;
@@ -56,9 +58,14 @@ namespace AdMakerM
                 SSDOptionsColl = comp.SSDs;
                 HDDOptionsColl = comp.HDDs;
                 ProcessorOptionsColl = comp.Processors;
+                MBOptionsColl = comp.Motherboards;
+                CaseOptionsColl = comp.Cases;
+                CPUCoolerOptionsColl = comp.CPUCoolers;
+                PowerOptionsColl = comp.PowerSupplys;
                 ImageOptionsColl = comp.ImagesPath;
                 AdTitle = comp.Title;
                 AdDesc = comp.Description;
+                InternalTitle = comp.InternalTitle;
             }
             this.comp = comp;
             if (this.comp == null) this.comp = new Computer();
@@ -79,7 +86,7 @@ namespace AdMakerM
         private void ShowVariants()
         {
             int variantsCount = 1;
-            if(VideoAdaptersColl.Count!=0)
+            if (VideoAdaptersColl.Count != 0)
             {
                 variantsCount = variantsCount * VideoAdaptersColl.Count;
             }
@@ -101,13 +108,13 @@ namespace AdMakerM
             }
 
             variantsLabel.Content = variantsCount.ToString();
-            if(comp!=null)
+            if (comp != null)
                 photoCountLabel.Content = comp.ImagesPath.Count.ToString();
         }
 
         private void AddCompButton_Click(object sender, RoutedEventArgs e)
         {
-            if(editMode)
+            if (editMode)
             {
                 comp.Price = Price;
                 comp.VideoAdapters = VideoAdaptersColl;
@@ -115,9 +122,14 @@ namespace AdMakerM
                 comp.SSDs = SSDOptionsColl;
                 comp.HDDs = HDDOptionsColl;
                 comp.Processors = ProcessorOptionsColl;
+                comp.Motherboards = MBOptionsColl;
+                comp.Cases = CaseOptionsColl;
+                comp.CPUCoolers = CPUCoolerOptionsColl;
+                comp.PowerSupplys = PowerOptionsColl;
                 comp.ImagesPath = ImageOptionsColl;
                 comp.Title = AdTitle;
                 comp.Description = AdDesc;
+                comp.InternalTitle= InternalTitle;
                 global.SaveAll();
             }
             else
@@ -132,11 +144,16 @@ namespace AdMakerM
                     VideoAdapters = VideoAdaptersColl,
                     SSDs = SSDOptionsColl,
                     HDDs = HDDOptionsColl,
-                    Processors = ProcessorOptionsColl
+                    Processors = ProcessorOptionsColl,
+                    Motherboards = MBOptionsColl,
+                    Cases = CaseOptionsColl,
+                    CPUCoolers = CPUCoolerOptionsColl,
+                    PowerSupplys = PowerOptionsColl,
+                    InternalTitle = InternalTitle
                 };
                 global.Comps.Add(comp);
             }
-            
+
             Close();
         }
 
@@ -154,7 +171,7 @@ namespace AdMakerM
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             var text = ((Button)(FrameworkElement)sender).Content.ToString();
-            descTextBox.Text += " {"+ text + "}";
+            descTextBox.Text += " {" + text + "}";
         }
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
@@ -192,7 +209,7 @@ namespace AdMakerM
 
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
-            
+
         }
 
         private void Button_Click_7(object sender, RoutedEventArgs e)
@@ -237,6 +254,23 @@ namespace AdMakerM
             cpuCoolerOptionsDataGrid.ItemsSource = CPUCoolerOptionsColl;
             cpuCoolerOptionsDataGrid.Items.Refresh();
             ShowVariants();
+        }
+
+        private void Button_Click_11(object sender, RoutedEventArgs e)
+        {
+            Views.AddPower f = new Views.AddPower(global);
+            f.ShowDialog();
+            PowerOptionsColl = f.SelectedPowerSupply;
+            powerOptionsDataGrid.ItemsSource = null;
+            powerOptionsDataGrid.ItemsSource = PowerOptionsColl;
+            powerOptionsDataGrid.Items.Refresh();
+            ShowVariants();
+        }
+
+        private void Button_Click_12(object sender, RoutedEventArgs e)
+        {
+            var text = ((Button)(FrameworkElement)sender).Content.ToString();
+            descTextBox.Text += "*" + text + "*";
         }
     }
 }

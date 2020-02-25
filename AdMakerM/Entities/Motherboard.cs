@@ -11,6 +11,7 @@ namespace AdMakerM
         public ProductType ProductType { get => ProductType.Motherboard; }
         public string Guid { get; set; }
         public string Title { get; set; }
+        public string Template { get; } = "{mb}";
         public string Description { get; set; }
         public int MaxProcessorTDP { get; set; }
         public decimal Price { get; set; }

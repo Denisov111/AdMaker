@@ -6,22 +6,17 @@ using System.Threading.Tasks;
 
 namespace AdMakerM
 {
-    //public enum ProductType
-    //{
-    //    Computer,
-    //    VideoAdapter,
-    //    Memory,
-    //    HDD,
-    //    SSD,
-    //    Processor,
-    //    Monitor,
-    //    PowerSupply
-    //}
 
-    //class Product
-    //{
-    //    public ProductType ProductType { get; set; }
-    //    public IProduct ProductObject { get; set; }
-        
-    //}
+    public class Product : IProduct
+    {
+        public ProductType ProductType { get; set; }
+        public string Title { get; set; }
+        public string Guid { get; set; }
+        public string Template { get; set; }
+        public string Description { get; set; }
+        public string ImgFileName { get; set; }
+        public string ImgFileDir { get; set; }
+        public string ImgFilePath { get; set; }
+        public decimal Price { get; set; }
+    }
 }

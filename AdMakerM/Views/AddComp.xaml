@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMakerM"
         mc:Ignorable="d"
-        Title="AddComp" Height="740" Width="1200">
+        Title="AddComp" Height="803" Width="1200">
     <Grid>
 
         <Grid.Resources>
@@ -15,28 +15,31 @@
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>
-        
-        <StackPanel HorizontalAlignment="Left" Height="690" Margin="10,10,0,0" VerticalAlignment="Top" Width="302">
+
+        <StackPanel HorizontalAlignment="Left" Height="790" Margin="10,10,0,-44" VerticalAlignment="Top" Width="350">
             <Label Content="Новое объявление"/>
             <Label Content="Название"/>
-            <!--<TextBox Height="43" TextWrapping="Wrap"
-                     Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox Height="43" TextWrapping="Wrap"
                      Text="{Binding AdTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Label Content="Внутреннее название"/>
+            <TextBox Height="43" TextWrapping="Wrap"
+                     Text="{Binding InternalTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="Объявление"/>
-            <!--<TextBox Height="104" TextWrapping="Wrap" 
-                     Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>-->
             <TextBox x:Name="descTextBox" Height="95" TextWrapping="Wrap" 
                      Text="{Binding AdDesc, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True"/>
-            <StackPanel Height="30" Orientation="Horizontal">
+            <StackPanel Height="23" Orientation="Horizontal">
                 <Button Content="video" Click="Button_Click_2"/>
                 <Button Content="memory" Click="Button_Click_2"/>
                 <Button Content="hdd" Click="Button_Click_2"/>
                 <Button Content="ssd" Click="Button_Click_2"/>
+                <Button Content="case" Click="Button_Click_2"/>
+                <Button Content="mb" Click="Button_Click_2"/>
+                <Button Content="power" Click="Button_Click_2"/>
+                <Button Content="cpucooler" Click="Button_Click_2"/>
                 <Button Content="processor" Click="Button_Click_2"/>
-
+                <Button Content="art" Click="Button_Click_12"/>
             </StackPanel>
-            <StackPanel Height="297">
+            <StackPanel Height="330">
                 <Label Content="опции сборки"/>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
                     <Button Content="Видеокарты" 
@@ -59,47 +62,47 @@
                            Margin="20,0,0,0" Width="150" Click="Button_Click_4" />
                 </StackPanel>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
-                    <Button Content="Процессор"  Margin="20,0,0,0" Width="150" Click="Button_Click_5" />
+                    <Button Content="Процессор" Margin="20,0,0,0" Width="150" Click="Button_Click_5" />
                 </StackPanel>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
-                    <Button Content="Мать"  Margin="20,0,0,0" Width="150" Click="Button_Click_8" />
+                    <Button Content="Мать" Margin="20,0,0,0" Width="150" Click="Button_Click_8" />
                 </StackPanel>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
-                    <Button Content="Корпус"  Margin="20,0,0,0" Width="150" Click="Button_Click_9" />
+                    <Button Content="Корпус" Margin="20,0,0,0" Width="150" Click="Button_Click_9" />
                 </StackPanel>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
-                    <Button Content="Кулер процессора"  Margin="20,0,0,0" Width="150" Click="Button_Click_10" />
+                    <Button Content="Кулер процессора" Margin="20,0,0,0" Width="150" Click="Button_Click_10" />
+                </StackPanel>
+                <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
+                    <Button Content="Блок питания" Margin="20,0,0,0" Width="150" Click="Button_Click_11" />
                 </StackPanel>
                 <StackPanel Height="25" Orientation="Horizontal" Margin="0,0,0,5">
                     <Button Content="Фотографии"  Margin="20,0,0,0" Width="150" Click="Button_Click_7" />
                 </StackPanel>
 
             </StackPanel>
-            <Label Content="{Binding PathToFolderWithImages}"/>
+            <!--<Label Content="{Binding PathToFolderWithImages}"/>-->
 
-            <StackPanel Orientation="Horizontal">
-                <!--<Label Content="мин."/>
+            <!--<StackPanel Orientation="Horizontal">
+                <Label Content="мин."/>
                 <TextBox Height="27" TextWrapping="Wrap" Width="100"/>
-                <Label Content="макс."/>-->
+                <Label Content="макс."/>
                 <Label Content="Цена без опций"/>
                 <TextBox Height="27" TextWrapping="Wrap" Width="100"
                          Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </StackPanel>
+            </StackPanel>-->
             <Button Content="Добавить"
                     x:Name="addCompButton"
                     Command="{Binding UniversalCommand}" CommandParameter="AddAd" Margin="20" Click="AddCompButton_Click"/>
-
             <StackPanel Orientation="Horizontal">
                 <Label Content="Варианты:   "/>
                 <Label x:Name="variantsLabel"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
                 <Label Content="Фото:   "/>
                 <Label x:Name="photoCountLabel"/>
             </StackPanel>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Left" Height="689" Margin="317,10,0,0" VerticalAlignment="Top" Width="865">
+        <StackPanel HorizontalAlignment="Left" Height="689" Margin="380,10,0,0" VerticalAlignment="Top" Width="865">
             <StackPanel Orientation="Horizontal">
                 <DataGrid ItemsSource="{Binding VideoAdaptersColl}"
                   x:Name="videoAdaptersDataGrid"
@@ -151,7 +154,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
-                
+
                 <DataGrid ItemsSource="{Binding ProcessorOptionsColl}"
                   x:Name="processorOptionsDataGrid"
                   HorizontalAlignment="Left" Height="130" Margin="0,0,0,5" VerticalAlignment="Top" Width="400"
@@ -168,15 +171,14 @@
                   CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
-                        <DataGridTextColumn Header="Socket" Binding="{Binding Socket}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
-                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
 
-                <DataGrid ItemsSource="{Binding MamaOptionsColl}"
+                <DataGrid ItemsSource="{Binding MBOptionsColl}"
                   x:Name="mamaOptionsDataGrid"
                   HorizontalAlignment="Left" Height="130" Margin="0,0,0,5" VerticalAlignment="Top" Width="400"
                   AutoGenerateColumns="False" CanUserAddRows="False">
@@ -191,16 +193,27 @@
                   HorizontalAlignment="Left" Height="130" Margin="0,0,0,5" VerticalAlignment="Top" Width="400"
                   CanUserAddRows="False" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        
-                            <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
-                            <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
-                        
+
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
 
 
             <StackPanel Orientation="Horizontal">
+                <DataGrid ItemsSource="{Binding PowerOptionsColl}"
+                  x:Name="powerOptionsDataGrid"
+                  HorizontalAlignment="Left" Height="130" Margin="0,0,0,5" VerticalAlignment="Top" Width="400"
+                  CanUserAddRows="False" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                        <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
                 <DataGrid ItemsSource="{Binding ImageOptionsColl}"
                   x:Name="imageOptionsDataGrid"
                   HorizontalAlignment="Left" Height="130" Margin="0,0,0,5" VerticalAlignment="Top" Width="400"

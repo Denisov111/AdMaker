@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMakerM.Views"
         mc:Ignorable="d"
-        Title="AdCard" Height="450" Width="800">
+        Title="AdCard" Height="750" Width="988">
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Left" Height="672" Margin="61,22,0,0" VerticalAlignment="Top" Width="424">
+            <TextBox Height="77"
+                     TextWrapping="Wrap"
+                     Text="{Binding Ad.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Content="Копировать заголовок" Click="Button_Click_2" Margin="174,0,94,0"/>
+            <TextBox Height="124" TextWrapping="Wrap"
+                     Text="{Binding Ad.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Margin="0,5,0,0"/>
+            <Button Content="Копировать объявление" Margin="174,0,94,0" Click="Button_Click_3"/>
+            <StackPanel Height="34" Orientation="Horizontal">
+                <Label Content="Цена: "/>
+                <Label x:Name="priceLabel" Content="{Binding Price}"/>
+            </StackPanel>
+            <Image Height="220" Source="{Binding Ad.ImgFileName}"/>
+            <StackPanel >
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Content="Юла" Width="50"/>
+                    <CheckBox IsChecked="{Binding Ad.IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="20"/>
+                    <TextBox Text="{Binding Ad.LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="210"/>
+                    <Button Content="->" Width="75" Tag="{Binding Ad.LinkOnUla}" Click="Button_Click_1"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Content="Авито" Width="50"/>
+                    <CheckBox IsChecked="{Binding Ad.IsPostedOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
+                    <TextBox Text="{Binding Ad.LinkOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="210"/>
+                    <Button Content="->" Width="75" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Content="Au" Width="50"/>
+                    <CheckBox IsChecked="{Binding Ad.IsPostedOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
+                    <TextBox Text="{Binding Ad.LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="210"/>
+                    <Button Content="->" Width="75" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Content="Фото "/>
+                    <Label Content="{Binding Ad.ModImgFileName}" Width="240"/>
+                    <Button Content="Коп." Width="75" Click="Button_Click"/>
+                </StackPanel>
+
+            </StackPanel>
+
+        </StackPanel>
+        <DataGrid HorizontalAlignment="Left" Height="239" Margin="506,22,0,0" VerticalAlignment="Top" Width="376"
+                  ItemsSource="{Binding Products}"
+                  AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
+                  ScrollViewer.CanContentScroll="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Binding="{Binding ProductType}" DisplayIndex="0" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
     </Grid>
 </Window>

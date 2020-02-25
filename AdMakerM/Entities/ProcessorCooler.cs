@@ -11,6 +11,7 @@ namespace AdMakerM
         public ProductType ProductType { get => ProductType.ProcessorCooler; }
         public string Guid { get; set; }
         public string Title { get; set; }
+        public string Template { get; } = "{cpucooler}";
         public string Description { get; set; }
         public decimal Price { get; set; }
         public string ImgFileName { get; set; }

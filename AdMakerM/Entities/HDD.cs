@@ -8,9 +8,10 @@ namespace AdMakerM
 {
     public class HDD : IProduct
     {
-        public ProductType ProductType { get => ProductType.Computer; }
+        public ProductType ProductType { get => ProductType.HDD; }
         public string Guid { get; set; }
         public string Title { get; set; }
+        public string Template { get; } = "{hdd}";
         public int Volume { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

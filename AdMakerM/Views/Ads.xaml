@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdMakerM.Views"
         mc:Ignorable="d"
-        Title="Ads" Height="450" Width="1071">
+        Title="Ads" Height="740" Width="1071">
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="Face">
@@ -17,18 +17,18 @@
                 <StackPanel Width="300">
                     <StackPanel Width="300" Orientation="Horizontal">
                         <Label Content="Юла" Width="50"/>
-                        <CheckBox IsChecked="{Binding IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="20"/>
-                        <TextBox Text="{Binding LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="250"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="20" IsEnabled="False"/>
+                        <TextBox Text="{Binding LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="250" IsEnabled="False"/>
                     </StackPanel>
                     <StackPanel Width="300" Orientation="Horizontal">
                         <Label Content="Авито" Width="50"/>
-                        <CheckBox IsChecked="{Binding IsPostedOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
-                        <TextBox Text="{Binding LinkOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20" IsEnabled="False"/>
+                        <TextBox Text="{Binding LinkOnAvito, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" IsEnabled="False"/>
                     </StackPanel>
                     <StackPanel Width="300" Orientation="Horizontal">
                         <Label Content="Au" Width="50"/>
-                        <CheckBox IsChecked="{Binding IsPostedOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
-                        <TextBox Text="{Binding LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20" IsEnabled="False"/>
+                        <TextBox Text="{Binding LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" IsEnabled="False"/>
                     </StackPanel>
                     <StackPanel Width="300" Orientation="Horizontal">
                         <Button Content="Карточка объявления" Click="Button_Click_3" Tag="{Binding Articul}"/>
@@ -62,6 +62,7 @@
         <Button Content="Преобразовать все фото" HorizontalAlignment="Left" Margin="99,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
         <Image x:Name="imageEditorImage" HorizontalAlignment="Left" Height="134" Margin="432,9,0,0" VerticalAlignment="Top" Width="192"/>
         <Button Content="Создать иконки" HorizontalAlignment="Left" Margin="268,10,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click_2"/>
+        <Button Content="Удалить объявления" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click_4"/>
 
     </Grid>
 </Window>

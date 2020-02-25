@@ -27,6 +27,7 @@ namespace AdMakerM
         ProductType ProductType { get; }
         string Guid { get; }
         string Title { get; set; }
+        string Template { get; }
         string Description { get; set; }
         decimal Price { get; set; }
         string ImgFileName { get; set; }
