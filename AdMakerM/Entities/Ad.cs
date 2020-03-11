@@ -21,9 +21,11 @@ namespace AdMakerM
         bool isPostedOnUla;
         bool isPostedOnAvito;
         bool isPostedOnAu;
+        bool isPostedOnVK;
         string linkOnUla;
         string linkOnAvito;
         string linkOnAu;
+        string linkOnVK;
 
         public List<string> Guids = new List<string>();
 
@@ -121,6 +123,16 @@ namespace AdMakerM
             }
         }
 
+        public bool IsPostedOnVK
+        {
+            get { return isPostedOnVK; }
+            set
+            {
+                isPostedOnVK = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string LinkOnUla
         {
             get { return linkOnUla; }
@@ -147,6 +159,16 @@ namespace AdMakerM
             set
             {
                 linkOnAu = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LinkOnVK
+        {
+            get { return linkOnVK; }
+            set
+            {
+                linkOnVK = value;
                 OnPropertyChanged();
             }
         }

@@ -50,7 +50,13 @@
         
         
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
-            <Button Content="Добавить компьютер" HorizontalAlignment="Left" VerticalAlignment="Top" Width="133" Click="Button_Click"/>
+            <StackPanel Width="133" Height="253">
+                <Button Content="Добавить компьютер" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click"/>
+                <Label Content="Поиск по артикулу"/>
+                <TextBox Height="23" TextWrapping="Wrap" x:Name="findArticulTextBox"/>
+                <Button Content="Искать" Click="Button_Click_3"/>
+            </StackPanel>
+            
             <DataGrid x:Name="compsDataGrid"
             HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="802"
                   ItemsSource="{Binding Comps}" AutoGenerateColumns="False" CanUserAddRows="False" ScrollViewer.CanContentScroll="False" RowHeight="120">

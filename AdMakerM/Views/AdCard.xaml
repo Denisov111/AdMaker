@@ -40,6 +40,12 @@
                     <Button Content="->" Width="75" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <Label Content="VK" Width="50"/>
+                    <CheckBox IsChecked="{Binding Ad.IsPostedOnVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
+                    <TextBox Text="{Binding Ad.LinkOnVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="210"/>
+                    <Button Content="->" Width="75" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <Label Content="Фото "/>
                     <Label Content="{Binding Ad.ModImgFileName}" Width="240"/>
                     <Button Content="Коп." Width="75" Click="Button_Click"/>

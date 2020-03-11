@@ -60,8 +60,8 @@ namespace AdMakerM.Views
             {
                 // Open document
                 //string filename = dlg.FileName;
-                
 
+                await Task.Delay(1000);
                 foreach(string fileName in dlg.FileNames)
                 {
                     AdImage adImage = new AdImage() { Path = fileName };

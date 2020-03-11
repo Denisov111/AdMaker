@@ -8,7 +8,7 @@
         Title="VideoCards" Height="800" Width="1200">
     <Grid>
         <DataGrid x:Name="videoAdaptersDataGrid"
-                  HorizontalAlignment="Left" Height="161" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" 
+                  HorizontalAlignment="Left" Height="277" Margin="10,0,0,0" VerticalAlignment="Top" Width="772" 
                   ItemsSource="{Binding VideoAdapters}"
                   AutoGenerateColumns="False" CanUserAddRows="False" >
             <DataGrid.Columns>
@@ -20,10 +20,10 @@
 
         </DataGrid>
 
-        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,182,0,0" VerticalAlignment="Top" Width="513">
+        <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,282,0,0" VerticalAlignment="Top" Width="613">
             <StackPanel  Orientation="Horizontal">
                 <Label Content="Название" Width="117"/>
-                <TextBox x:Name="cardTitleTextBox" Height="22" TextWrapping="Wrap"  Width="117" Text="{Binding Local.CardTitle}"/>
+                <TextBox x:Name="cardTitleTextBox" Height="22" TextWrapping="NoWrap"  Width="300" Text="{Binding Local.CardTitle}"/>
                 <Button Content="Geforce" Width="75" Click="Button_Click_1"/>
                 <Button Content="Radeon" Width="75" Click="Button_Click_2"/>
             </StackPanel>

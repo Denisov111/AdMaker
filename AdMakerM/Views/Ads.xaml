@@ -31,6 +31,11 @@
                         <TextBox Text="{Binding LinkOnAu, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" IsEnabled="False"/>
                     </StackPanel>
                     <StackPanel Width="300" Orientation="Horizontal">
+                        <Label Content="Vk" Width="50"/>
+                        <CheckBox IsChecked="{Binding IsPostedOnVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20" IsEnabled="False"/>
+                        <TextBox Text="{Binding LinkOnVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250" IsEnabled="False"/>
+                    </StackPanel>
+                    <StackPanel Width="300" Orientation="Horizontal">
                         <Button Content="Карточка объявления" Click="Button_Click_3" Tag="{Binding Articul}"/>
                     </StackPanel>
                 </StackPanel>
