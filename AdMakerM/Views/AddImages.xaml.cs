@@ -68,15 +68,28 @@ namespace AdMakerM.Views
                     try
                     {
                         string currentDir = Directory.GetCurrentDirectory();
+                        string fileName_ = System.IO.Path.GetFileName(fileName);
+
                         if (!Directory.Exists("icons"))
                         {
                             Directory.CreateDirectory("icons");
                         }
-                        string fileName_ = System.IO.Path.GetFileName(fileName);
+                        
                         string newFileName = "icons\\icon_" + fileName_;
                         string newPath = System.IO.Path.Combine(currentDir, newFileName);
                         await ImageEditor.EditImage(fileName, newPath, 100);
                         adImage.IconPath = newPath;
+
+                        if (!Directory.Exists("copies"))
+                        {
+                            Directory.CreateDirectory("copies");
+                        }
+                        string copyFileName = "copies\\copy_" + fileName_;
+                        string newCopyPath = System.IO.Path.Combine(currentDir, copyFileName);
+                        await ImageEditor.EditImage(fileName, newPath, 100);
+                        await ImageEditor.CopyAndRotate(fileName, newCopyPath);
+                        adImage.CopyPath = newCopyPath;
+                        adImage.Path = newCopyPath;
                     }
                     catch(Exception ex)
                     {

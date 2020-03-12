@@ -66,7 +66,6 @@
         <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
         <Button Content="Преобразовать все фото" HorizontalAlignment="Left" Margin="99,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
         <Image x:Name="imageEditorImage" HorizontalAlignment="Left" Height="134" Margin="432,9,0,0" VerticalAlignment="Top" Width="192"/>
-        <Button Content="Создать иконки" HorizontalAlignment="Left" Margin="268,10,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click_2"/>
         <Button Content="Удалить объявления" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click_4"/>
 
     </Grid>

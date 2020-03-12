@@ -65,6 +65,25 @@ namespace ImageEditor
                 image1.Source = bitmap;
 
                 var directories = ImageMetadataReader.ReadMetadata(localPath);
+                bool rotateToRight = false;
+                foreach(var dir in directories)
+                {
+                    if (dir.Name.Contains("Exif"))
+                    {
+                        foreach (var tag in dir.Tags)
+                        {
+                            
+                            if(tag.Name=="Orientation")
+                            {
+                                Console.WriteLine(tag);
+                                if(tag.Description.Contains("Rotate 90 CW"))
+                                {
+                                    rotateToRight = true;
+                                }
+                            }
+                        }
+                    }
+                }
 
                 double gipotenuseHorizontal = bitmap.Width;
                 double gipotenuseVertical = bitmap.Height;
@@ -97,8 +116,10 @@ namespace ImageEditor
                                         .Rotate(angle)
                                         .Contrast(10)
                                         .Brightness(10)
-                                        .Saturation(10)//Изменяет насыщенность текущего изображения
-                                        .Save(outStream);
+                                        .Saturation(10);//Изменяет насыщенность текущего изображения
+                            if (rotateToRight) imageFactory.Rotate(90);
+                            imageFactory.Save(outStream);
+                            
                         }
                         // Do something with the stream.
                         bitmapNew = new BitmapImage();

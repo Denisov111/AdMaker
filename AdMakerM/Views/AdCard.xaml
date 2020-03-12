@@ -19,7 +19,7 @@
                 <Label Content="Цена: "/>
                 <Label x:Name="priceLabel" Content="{Binding Price}"/>
             </StackPanel>
-            <Image Height="220" Source="{Binding Ad.ImgFileName}"/>
+            <Image Height="220" Source="{Binding Ad.ModImgFileName}"/>
             <StackPanel >
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <Label Content="Юла" Width="50"/>

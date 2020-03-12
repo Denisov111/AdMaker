@@ -208,28 +208,28 @@ namespace AdMakerM.Views
             global.SaveAll();
         }
 
-        async private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            string currentDir = Directory.GetCurrentDirectory();
-            if (!Directory.Exists("icons"))
-            {
-                Directory.CreateDirectory("icons");
-            }
+        //async private void Button_Click_2(object sender, RoutedEventArgs e)
+        //{
+        //    string currentDir = Directory.GetCurrentDirectory();
+        //    if (!Directory.Exists("icons"))
+        //    {
+        //        Directory.CreateDirectory("icons");
+        //    }
 
-            for (int i = 0; i < comp.Ads.Count; i++)
-            {
-                if(String.IsNullOrWhiteSpace(comp.Ads[i].IconFileName))
-                {
+        //    for (int i = 0; i < comp.Ads.Count; i++)
+        //    {
+        //        if(String.IsNullOrWhiteSpace(comp.Ads[i].IconFileName))
+        //        {
                     
-                    string fileName_ = System.IO.Path.GetFileName(comp.Ads[i].ImgFileName);
-                    string newFileName = "icons\\icon_" + fileName_;
-                    string newPath = System.IO.Path.Combine(currentDir, newFileName);
-                    await ImageEditor.EditImage(comp.Ads[i].ImgFileName, newPath, 100);
-                    comp.Ads[i].IconFileName = newPath;
-                }
-            }
+        //            string fileName_ = System.IO.Path.GetFileName(comp.Ads[i].ImgFileName);
+        //            string newFileName = "icons\\icon_" + fileName_;
+        //            string newPath = System.IO.Path.Combine(currentDir, newFileName);
+        //            await ImageEditor.EditImage(comp.Ads[i].ImgFileName, newPath, 100);
+        //            comp.Ads[i].IconFileName = newPath;
+        //        }
+        //    }
 
-        }
+        //}
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
