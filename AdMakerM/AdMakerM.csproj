@@ -60,6 +60,9 @@
     <Reference Include="XmpCore, Version=6.1.10.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\XmpCore.6.1.10\lib\net35\XmpCore.dll</HintPath>
     </Reference>
+    <Reference Include="xNet">
+      <HintPath>..\..\Switch\ChromeModForNet\bin\Debug\xNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -74,6 +77,7 @@
     <Compile Include="Models\Global.cs" />
     <Compile Include="Models\Helpers.cs" />
     <Compile Include="Models\ImageEditor.cs" />
+    <Compile Include="Models\Net.cs" />
     <Compile Include="Models\Randomizator.cs" />
     <Compile Include="Views\AdCard.xaml.cs">
       <DependentUpon>AdCard.xaml</DependentUpon>

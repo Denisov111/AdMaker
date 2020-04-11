@@ -12,6 +12,7 @@ namespace AdMakerM
     public class Ad : INotifyPropertyChanged
     {
         private decimal price;
+        private decimal buyPrice;
         private string title;
         private string description;
         string imgFileName;
@@ -53,6 +54,15 @@ namespace AdMakerM
             set
             {
                 price = value;
+                OnPropertyChanged();
+            }
+        }
+        public decimal BuyPrice
+        {
+            get { return buyPrice; }
+            set
+            {
+                buyPrice = value;
                 OnPropertyChanged();
             }
         }

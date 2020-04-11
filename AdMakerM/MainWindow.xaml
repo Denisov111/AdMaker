@@ -41,7 +41,7 @@
             </DataTemplate>
             <DataTemplate x:Key="DescriptionTemplate">
                 <ScrollViewer>
-                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Width="400" />
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Width="300" />
                 </ScrollViewer>
             </DataTemplate>
         </Grid.Resources>
@@ -59,9 +59,9 @@
             
             <DataGrid x:Name="compsDataGrid"
             HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="802"
-                  ItemsSource="{Binding Comps}" AutoGenerateColumns="False" CanUserAddRows="False" ScrollViewer.CanContentScroll="False" RowHeight="120">
+                  ItemsSource="{Binding Comps}" AutoGenerateColumns="False" CanUserAddRows="False" ScrollViewer.CanContentScroll="False" RowHeight="150">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="" DisplayIndex="0" CellTemplate="{StaticResource TitleTemplate}" Width="200"/>
+                    <DataGridTemplateColumn Header="" DisplayIndex="0" CellTemplate="{StaticResource TitleTemplate}" Width="300"/>
                     <DataGridTemplateColumn Header="" DisplayIndex="1" CellTemplate="{StaticResource DescriptionTemplate}"/>
                     <DataGridTemplateColumn Header="" DisplayIndex="2" CellTemplate="{StaticResource EditButton}"/>
                     <DataGridTemplateColumn Header="" DisplayIndex="3" CellTemplate="{StaticResource AdsButton}"/>

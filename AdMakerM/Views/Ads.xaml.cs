@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace AdMakerM.Views
 {
@@ -24,36 +25,37 @@ namespace AdMakerM.Views
         public ObservableCollection<Ad> Ads_ { get; set; } = new ObservableCollection<Ad>();
         ObservableCollection<Ad> CacheAds_ { get; set; } = new ObservableCollection<Ad>();
         Global global;
-        Computer comp;
+        Computer Comp { get; set; }
 
-        public Ads(Global global, Computer comp)
+        public Ads(Global global, Computer comp_)
         {
             InitializeComponent();
             this.global = global;
-            this.comp = comp;
+            Comp = comp_;
             DataContext = this;
 
             List<string> partsTemplates = new List<string>() { "{video}", "{memory}", "{hdd}", "{ssd}", "{processor}",
                 "{case}", "{mb}", "{power}", "{cpucooler}" };
 
             //если объявления ещё не генерились, то генерим
-            if (comp.Ads.Count==0)
+            if (Comp.Ads.Count == 0)
             {
-                Ad ad = new Ad() { Title = comp.Title, Description = comp.Description };
-                
+                Ad ad = new Ad() { Title = Comp.Title, Description = Comp.Description };
+
                 Ads_.Add(ad);
 
-                foreach(string temp in partsTemplates)
+                foreach (string temp in partsTemplates)
                 {
                     CacheAds_ = new ObservableCollection<Ad>();
                     foreach (Ad ad_ in Ads_)
                     {
-                        ObservableCollection<IProduct> parts = GetParts(temp, comp);
+                        ObservableCollection<IProduct> parts = GetParts(temp, Comp);
                         foreach (IProduct pr in parts)
                         {
                             decimal price = ad_.Price + pr.Price;
                             string desc = ad_.Description.Replace(temp, pr.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = comp.Title, Price = price };
+                            string title = ad_.Title.Replace(temp, pr.ToString());
+                            Ad newAd = new Ad() { Description = desc, Title = title, Price = price };
 
                             foreach (string oldPart in ad_.Guids)
                                 newAd.Guids.Add(oldPart);
@@ -65,39 +67,51 @@ namespace AdMakerM.Views
                     Ads_ = (CacheAds_.Count > 0) ? CacheAds_ : Ads_;
                 }
 
+                //добавляем фото
+                if(Comp.ImagesPath.Count > 0)
+                {
+                    int imageIndex = 0;
+                    for (int i = 0; i < Ads_.Count; i++)
+                    {
+                        if (imageIndex == Comp.ImagesPath.Count) imageIndex = 0;
+                        Ads_[i].ImgFileName = Comp.ImagesPath[imageIndex].Path;
+                        Ads_[i].IconFileName = Comp.ImagesPath[imageIndex].IconPath;
+                        imageIndex++;
+                    }
+                }
                 
 
-                //добавляем фото
-                for(int i=0;i<comp.ImagesPath.Count && i< Ads_.Count; i++)
+                for (int i = 0; i < Ads_.Count; i++)
                 {
-                    Ads_[i].ImgFileName = comp.ImagesPath[i].Path;
-                    Ads_[i].IconFileName = comp.ImagesPath[i].IconPath;
-                }
 
-                for (int i = 0; i <  Ads_.Count; i++)
-                {
-                    
                     Ads_[i].Description = Randomizator.ParseSpintax(Ads_[i].Description);
                     Ads_[i].Title = Randomizator.ParseSpintax(Ads_[i].Title);
 
-                    
+
                 }
 
-
-                comp.Ads = Ads_;
+                Comp.Ads = Ads_;
             }
-            Ads_ = comp.Ads;
-            adsDataGrid.ItemsSource = comp.Ads;
+            Ads_ = Comp.Ads;
+            adsDataGrid.ItemsSource = Comp.Ads;
             adsDataGrid.Items.Refresh();
+
+            videoComboBox.ItemsSource = Comp.VideoAdapters;
+            memoryComboBox.ItemsSource = Comp.Memories;
+            hddComboBox.ItemsSource = Comp.HDDs;
+            ssdComboBox.ItemsSource = Comp.SSDs;
+
+            adsCountLabel.Content = Comp.Ads.Count.ToString();
+            filteredAdsCountLabel.Content = Comp.Ads.Count.ToString();
         }
 
         private ObservableCollection<IProduct> GetParts(string temp, Computer comp)
         {
             ObservableCollection<IProduct> parts = new ObservableCollection<IProduct>();
-            switch(temp)
+            switch (temp)
             {
                 case "{video}":
-                    foreach(IProduct pr in comp.VideoAdapters)
+                    foreach (IProduct pr in comp.VideoAdapters)
                     {
                         parts.Add(pr);
                     }
@@ -158,15 +172,15 @@ namespace AdMakerM.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            for(int i=0;i<comp.Ads.Count;i++)
+            for (int i = 0; i < Comp.Ads.Count; i++)
             {
-                if(comp.Ads[i].Articul==0)
+                if (Comp.Ads[i].Articul == 0)
                 {
-                    comp.Ads[i].SetArticul();
+                    Comp.Ads[i].SetArticul();
                     if (Ads_[i].Description.Contains("*art*"))
-                        Ads_[i].Description = Ads_[i].Description.Replace("*art*", "#"+ Ads_[i].Articul);
+                        Ads_[i].Description = Ads_[i].Description.Replace("*art*", "#" + Ads_[i].Articul);
                 }
-                    
+
             }
 
             global.SaveAll();
@@ -180,68 +194,40 @@ namespace AdMakerM.Views
             {
                 Directory.CreateDirectory("modimages");
             }
-            for (int i = 0; i < comp.Ads.Count; i++)
+            for (int i = 0; i < Comp.Ads.Count; i++)
             {
-                string imagePath = comp.Ads[i].ImgFileName;
-                string newFileName = "modimages\\" + comp.Ads[i].Articul.ToString() + ".jpg";
+                string imagePath = Comp.Ads[i].ImgFileName;
+                string newFileName = "modimages\\" + Comp.Ads[i].Articul.ToString() + ".jpg";
                 string newPath = System.IO.Path.Combine(currentDir, newFileName);
-                if(!String.IsNullOrWhiteSpace(imagePath))
+                if (!String.IsNullOrWhiteSpace(imagePath))
                 {
                     try
                     {
                         imageEditorImage.Source = await ImageEditor.EditImage(imagePath, newPath);
-                        comp.Ads[i].ModImgFileName = newPath;
+                        Comp.Ads[i].ModImgFileName = newPath;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.WriteLine(ex);
                     }
-                    
+
                 }
-                
-                //if (comp.Ads[i].Articul == 0)
-                //{
-                //    comp.Ads[i].SetArticul();
-                //}
 
             }
             global.SaveAll();
         }
 
-        //async private void Button_Click_2(object sender, RoutedEventArgs e)
-        //{
-        //    string currentDir = Directory.GetCurrentDirectory();
-        //    if (!Directory.Exists("icons"))
-        //    {
-        //        Directory.CreateDirectory("icons");
-        //    }
-
-        //    for (int i = 0; i < comp.Ads.Count; i++)
-        //    {
-        //        if(String.IsNullOrWhiteSpace(comp.Ads[i].IconFileName))
-        //        {
-                    
-        //            string fileName_ = System.IO.Path.GetFileName(comp.Ads[i].ImgFileName);
-        //            string newFileName = "icons\\icon_" + fileName_;
-        //            string newPath = System.IO.Path.Combine(currentDir, newFileName);
-        //            await ImageEditor.EditImage(comp.Ads[i].ImgFileName, newPath, 100);
-        //            comp.Ads[i].IconFileName = newPath;
-        //        }
-        //    }
-
-        //}
-
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             string tag = ((Button)sender).Tag.ToString();
-            Ad ad = Ads_.Where(a=>a.Articul.ToString()==tag).FirstOrDefault();
+            Ad ad = Ads_.Where(a => a.Articul.ToString() == tag).FirstOrDefault();
             Views.AdCard f = new AdCard(ad, global);
             try
             {
                 f.ShowDialog();
             }
             catch { }
-            
+
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
@@ -249,6 +235,54 @@ namespace AdMakerM.Views
             Ads_.Clear();
             global.SaveAll();
             Close();
+        }
+
+        private void VideoComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            StringCollection selectedGuids = new StringCollection();
+
+            VideoAdapter selectedVideoAdapter = (VideoAdapter)(videoComboBox).SelectedItem;
+            if (selectedVideoAdapter != null) selectedGuids.Add(selectedVideoAdapter.Guid);
+
+            Memory selectedMemory = (Memory)(memoryComboBox).SelectedItem;
+            if (selectedMemory != null) selectedGuids.Add(selectedMemory.Guid);
+
+            HDD selectedHDD = (HDD)(hddComboBox).SelectedItem;
+            if (selectedHDD != null) selectedGuids.Add(selectedHDD.Guid);
+
+            SSD selectedSSD = (SSD)(ssdComboBox).SelectedItem;
+            if (selectedSSD != null) selectedGuids.Add(selectedSSD.Guid);
+
+            RefreshDataGrid(selectedGuids);
+        }
+
+        private void RefreshDataGrid(StringCollection selectedGuids)
+        {
+            if(selectedGuids.Count==0)
+            {
+                adsDataGrid.ItemsSource = Comp.Ads;
+            }
+            else
+            {
+                ObservableCollection<Ad> filteredAds = new ObservableCollection<Ad>(Comp.Ads);
+                foreach (string guid in selectedGuids)
+                {
+                    filteredAds = new ObservableCollection<Ad>(filteredAds.Where(ad => ad.Guids.Contains(guid)));
+                }
+                adsDataGrid.ItemsSource = filteredAds;
+            }
+            adsDataGrid.Items.Refresh();
+            filteredAdsCountLabel.Content = adsDataGrid.Items.Count.ToString();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            videoComboBox.SelectedItem = null;
+            memoryComboBox.SelectedItem = null;
+            hddComboBox.SelectedItem = null;
+            ssdComboBox.SelectedItem = null;
+            adsDataGrid.ItemsSource = Comp.Ads;
+            filteredAdsCountLabel.Content = adsDataGrid.Items.Count.ToString();
         }
     }
 }

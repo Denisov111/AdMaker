@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="AdCard" Height="750" Width="988">
     <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="672" Margin="61,22,0,0" VerticalAlignment="Top" Width="424">
+        <StackPanel HorizontalAlignment="Left" Height="692" Margin="61,22,0,0" VerticalAlignment="Top" Width="424">
             <TextBox Height="77"
                      TextWrapping="Wrap"
                      Text="{Binding Ad.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
@@ -16,16 +16,19 @@
                      Text="{Binding Ad.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" Margin="0,5,0,0"/>
             <Button Content="Копировать объявление" Margin="174,0,94,0" Click="Button_Click_3"/>
             <StackPanel Height="34" Orientation="Horizontal">
-                <Label Content="Цена: "/>
+                <Label Content="Себестоимость: "/>
                 <Label x:Name="priceLabel" Content="{Binding Price}"/>
+                <Label Content="    Цена: "/>
+                <TextBox TextWrapping="NoWrap" Text="{Binding Ad.BuyPrice, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
             </StackPanel>
             <Image Height="220" Source="{Binding Ad.ModImgFileName}"/>
-            <StackPanel >
+            <StackPanel Height="185" >
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <Label Content="Юла" Width="50"/>
-                    <CheckBox IsChecked="{Binding Ad.IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="20"/>
+                    <CheckBox IsChecked="{Binding Ad.IsPostedOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"  Width="20"/>
                     <TextBox Text="{Binding Ad.LinkOnUla, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  Width="210"/>
                     <Button Content="->" Width="75" Tag="{Binding Ad.LinkOnUla}" Click="Button_Click_1"/>
+                    <Button Content="->" Width="75" Click="Button_Click_6"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <Label Content="Авито" Width="50"/>
@@ -43,18 +46,19 @@
                     <Label Content="VK" Width="50"/>
                     <CheckBox IsChecked="{Binding Ad.IsPostedOnVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="20"/>
                     <TextBox Text="{Binding Ad.LinkOnVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="210"/>
-                    <Button Content="->" Width="75" />
+                    <Button Content="->" Width="75" Click="Button_Click_4" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
                     <Label Content="Фото "/>
                     <Label Content="{Binding Ad.ModImgFileName}" Width="240"/>
                     <Button Content="Коп." Width="75" Click="Button_Click"/>
                 </StackPanel>
+                <Button Content="Создать фото"  Height="25" Click="Button_Click_5"/>
 
             </StackPanel>
 
         </StackPanel>
-        <DataGrid HorizontalAlignment="Left" Height="239" Margin="506,22,0,0" VerticalAlignment="Top" Width="376"
+        <DataGrid HorizontalAlignment="Left" Height="239" Margin="506,22,0,0" VerticalAlignment="Top" Width="464"
                   ItemsSource="{Binding Products}"
                   AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True"
                   ScrollViewer.CanContentScroll="False">

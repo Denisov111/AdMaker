@@ -22,10 +22,17 @@ namespace AdMakerM
 
         async internal static Task<BitmapImage> EditImage(string path, string newFileName)
         {
-            int angle = 3;
-            int contrast = 10;
-            int brightness = 10;
-            int saturation=10;//Изменяет насыщенность текущего изображения
+            //создаём случайные настройки изображения
+            int angleRange = 3;
+            int contrastRange = 10;
+            int brightnessRange = 10;
+            int saturationRange = 10;
+
+            int randAngle = rnd.Next(-angleRange, angleRange);
+            int angle = randAngle == 0? angleRange : randAngle;
+            int contrast = rnd.Next(-contrastRange, contrastRange);
+            int brightness = rnd.Next(-brightnessRange, brightnessRange);
+            int saturation= rnd.Next(-saturationRange, saturationRange);//Изменяет насыщенность текущего изображения
 
 
             Bitmap bitmap = new Bitmap(path);
@@ -63,8 +70,8 @@ namespace AdMakerM
             double sin = Math.Sin(Math.PI * angle / 180); //n=0,5
 
             //высота в пикселях, которую нужно будет отдезать снизу и сверху
-            double catetHorizontal = gipotenuseHorizontal * sin;
-            double catetVertical = gipotenuseVertical * sin;
+            double catetHorizontal = Math.Abs(gipotenuseHorizontal * sin);
+            double catetVertical = Math.Abs(gipotenuseVertical * sin);
 
 
             byte[] photoBytes = File.ReadAllBytes(path);

@@ -87,12 +87,12 @@ namespace ImageEditor
 
                 double gipotenuseHorizontal = bitmap.Width;
                 double gipotenuseVertical = bitmap.Height;
-                int angle = 10;
+                int angle = -6;
                 double sin = Math.Sin(Math.PI * angle / 180); //n=0,5
 
                 //высота в пикселях, которую нужно будет отдезать снизу и сверху
-                double catetHorizontal = gipotenuseHorizontal * sin;
-                double catetVertical = gipotenuseVertical * sin;
+                double catetHorizontal = Math.Abs(gipotenuseHorizontal * sin);
+                double catetVertical = Math.Abs(gipotenuseVertical * sin);
 
 
                 byte[] photoBytes = File.ReadAllBytes(localPath);

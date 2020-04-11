@@ -41,14 +41,14 @@
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>
-        
+
         <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Stretch"  Margin="0,148,0,0" VerticalAlignment="Stretch"
-                  ItemsSource="{Binding Local.Ads_}"
+                  ItemsSource="{Binding Ads_}"
                   AutoGenerateColumns="False"   CanUserAddRows="False"
                   ScrollViewer.CanContentScroll="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="0" Header="Photo" CellTemplate="{StaticResource Face}"/>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="1" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" DisplayIndex="1" ClipboardContentBinding="{x:Null}" Width="300"/>
                 <DataGridTextColumn Header="Art." Binding="{Binding Articul}" DisplayIndex="2" ClipboardContentBinding="{x:Null}"/>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="300" DisplayIndex="3" ClipboardContentBinding="{x:Null}">
                     <DataGridTextColumn.ElementStyle>
@@ -63,10 +63,29 @@
                 <DataGridTextColumn Header="ModImgFileName" Binding="{Binding ModImgFileName}" DisplayIndex="7" ClipboardContentBinding="{x:Null}" Width="250"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Сохранить" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <Button Content="Преобразовать все фото" HorizontalAlignment="Left" Margin="99,10,0,0" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
+
         <Image x:Name="imageEditorImage" HorizontalAlignment="Left" Height="134" Margin="432,9,0,0" VerticalAlignment="Top" Width="192"/>
-        <Button Content="Удалить объявления" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="143" Click="Button_Click_4"/>
+
+        <StackPanel HorizontalAlignment="Left" Height="133" Margin="307,10,0,0" VerticalAlignment="Top" Width="399">
+            <ComboBox x:Name="videoComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
+            <ComboBox x:Name="memoryComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
+            <ComboBox x:Name="hddComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
+            <ComboBox x:Name="ssdComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
+        </StackPanel>
+        <Button Content="Сброс фильтра" HorizontalAlignment="Left" Margin="761,41,0,0" VerticalAlignment="Top" Width="114" Click="Button_Click_2"/>
+        <StackPanel HorizontalAlignment="Left" Height="133" Margin="10,10,0,0" VerticalAlignment="Top" Width="292">
+            <Button Content="Сохранить" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+            <Button Content="Удалить объявления" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top" Width="143" Click="Button_Click_4"/>
+            <Button Content="Преобразовать все фото" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top" Width="150" Click="Button_Click_1"/>
+            <StackPanel Height="25" Orientation="Horizontal">
+                <Label Content="Всего объявлений: "/>
+                <Label x:Name="adsCountLabel" Content=""/>
+            </StackPanel>
+            <StackPanel Height="25" Orientation="Horizontal">
+                <Label Content="Отфильтровано объявлений: "/>
+                <Label x:Name="filteredAdsCountLabel" Content=""/>
+            </StackPanel>
+        </StackPanel>
 
     </Grid>
 </Window>
