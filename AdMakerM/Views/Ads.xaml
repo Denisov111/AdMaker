@@ -42,7 +42,7 @@
             </DataTemplate>
         </Grid.Resources>
 
-        <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Stretch"  Margin="0,148,0,0" VerticalAlignment="Stretch"
+        <DataGrid x:Name="adsDataGrid" HorizontalAlignment="Stretch"  Margin="0,207,0,0" VerticalAlignment="Stretch"
                   ItemsSource="{Binding Ads_}"
                   AutoGenerateColumns="False"   CanUserAddRows="False"
                   ScrollViewer.CanContentScroll="False">
@@ -58,21 +58,51 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" DisplayIndex="4" ClipboardContentBinding="{x:Null}"/>
-                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="5" Header="Options" CellTemplate="{StaticResource Options}"/>
-                <DataGridTextColumn Header="ImgFileName" Binding="{Binding ImgFileName}" DisplayIndex="6" ClipboardContentBinding="{x:Null}" Width="150"/>
-                <DataGridTextColumn Header="ModImgFileName" Binding="{Binding ModImgFileName}" DisplayIndex="7" ClipboardContentBinding="{x:Null}" Width="250"/>
+                <DataGridTextColumn Header="BuyPrice" Binding="{Binding BuyPrice}" DisplayIndex="5" ClipboardContentBinding="{x:Null}"/>
+                <DataGridTemplateColumn ClipboardContentBinding="{x:Null}" DisplayIndex="6" Header="Options" CellTemplate="{StaticResource Options}"/>
+                <DataGridTextColumn Header="ImgFileName" Binding="{Binding ImgFileName}" DisplayIndex="7" ClipboardContentBinding="{x:Null}" Width="150"/>
+                <DataGridTextColumn Header="ModImgFileName" Binding="{Binding ModImgFileName}" DisplayIndex="8" ClipboardContentBinding="{x:Null}" Width="250"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <Image x:Name="imageEditorImage" HorizontalAlignment="Left" Height="134" Margin="432,9,0,0" VerticalAlignment="Top" Width="192"/>
 
-        <StackPanel HorizontalAlignment="Left" Height="133" Margin="307,10,0,0" VerticalAlignment="Top" Width="399">
-            <ComboBox x:Name="videoComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
-            <ComboBox x:Name="memoryComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
-            <ComboBox x:Name="hddComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
-            <ComboBox x:Name="ssdComboBox" SelectionChanged="VideoComboBox_SelectionChanged"/>
+        <StackPanel HorizontalAlignment="Left" Height="192" Margin="307,10,0,0" VerticalAlignment="Top" Width="500">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="видео" Width="100"/>
+                <ComboBox x:Name="videoComboBox" SelectionChanged="VideoComboBox_SelectionChanged" Width="400"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="память" Width="100"/>
+                <ComboBox x:Name="memoryComboBox" SelectionChanged="VideoComboBox_SelectionChanged" Width="400"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="HDD" Width="100"/>
+                <ComboBox x:Name="hddComboBox" SelectionChanged="VideoComboBox_SelectionChanged" Width="400"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="SSD" Width="100"/>
+                <ComboBox x:Name="ssdComboBox" SelectionChanged="VideoComboBox_SelectionChanged" Width="400"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="CPU" Width="100"/>
+                <ComboBox x:Name="cpuComboBox" SelectionChanged="VideoComboBox_SelectionChanged" Width="400"/>
+            </StackPanel>
+        
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Цена min:"/>
+                <TextBox Width="60" Text="{Binding MinPriceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
+                <Label Content="Цена max:"/>
+                <TextBox Width="60" Text="{Binding MaxPriceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Себестоимость min:"/>
+                <TextBox Width="60" Text="{Binding MinCostPriceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
+                <Label Content="Цена max:"/>
+                <TextBox Width="60" Text="{Binding MaxCostPriceFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="TextBox_TextChanged"/>
+            </StackPanel>
         </StackPanel>
-        <Button Content="Сброс фильтра" HorizontalAlignment="Left" Margin="761,41,0,0" VerticalAlignment="Top" Width="114" Click="Button_Click_2"/>
+        <Button Content="Сброс фильтра" HorizontalAlignment="Left" Margin="862,38,0,0" VerticalAlignment="Top" Width="114" Click="Button_Click_2"/>
         <StackPanel HorizontalAlignment="Left" Height="133" Margin="10,10,0,0" VerticalAlignment="Top" Width="292">
             <Button Content="Сохранить" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
             <Button Content="Удалить объявления" HorizontalAlignment="Left" Margin="3" VerticalAlignment="Top" Width="143" Click="Button_Click_4"/>

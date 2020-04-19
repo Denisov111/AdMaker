@@ -51,10 +51,11 @@
         
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
             <StackPanel Width="133" Height="253">
-                <Button Content="Добавить компьютер" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click"/>
-                <Label Content="Поиск по артикулу"/>
-                <TextBox Height="23" TextWrapping="Wrap" x:Name="findArticulTextBox"/>
-                <Button Content="Искать" Click="Button_Click_3"/>
+                <Button Content="Добавить компьютер" HorizontalAlignment="Stretch" VerticalAlignment="Top" Click="Button_Click" Margin="3"/>
+                <Label Content="Поиск по артикулу" Margin="3"/>
+                <TextBox Height="23" TextWrapping="Wrap" x:Name="findArticulTextBox" Margin="3"/>
+                <Button Content="Искать" Click="Button_Click_3" Margin="3"/>
+                <Button Content="Опубликованные" Margin="3" Click="Button_Click_4"/>
             </StackPanel>
             
             <DataGrid x:Name="compsDataGrid"

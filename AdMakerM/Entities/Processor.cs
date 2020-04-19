@@ -8,7 +8,7 @@ namespace AdMakerM
 {
     public enum ProcessorSocket
     {
-        AM4, AM3PLUS, AM3, LGA1155, LGA1156, LGA1150, LGA775
+        AM4, AM3PLUS, AM3, LGA1155, LGA1156, LGA1150, LGA775, FM2, FM1
     }
 
     public class Processor : IProduct

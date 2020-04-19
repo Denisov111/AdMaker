@@ -24,8 +24,14 @@ namespace AdMakerM.Views
     {
         public ObservableCollection<Ad> Ads_ { get; set; } = new ObservableCollection<Ad>();
         ObservableCollection<Ad> CacheAds_ { get; set; } = new ObservableCollection<Ad>();
-        Global global;
         Computer Comp { get; set; }
+        public decimal MinPriceFilter { get; set; }
+        public decimal MaxPriceFilter { get; set; }
+        public decimal MinCostPriceFilter { get; set; }
+        public decimal MaxCostPriceFilter { get; set; }
+
+        Global global;
+        //bool IsPublishedAdsViewMode = false;
 
         public Ads(Global global, Computer comp_)
         {
@@ -34,75 +40,94 @@ namespace AdMakerM.Views
             Comp = comp_;
             DataContext = this;
 
-            List<string> partsTemplates = new List<string>() { "{video}", "{memory}", "{hdd}", "{ssd}", "{processor}",
+            if (Comp != null)
+            {
+                List<string> partsTemplates = new List<string>() { "{video}", "{memory}", "{hdd}", "{ssd}", "{processor}",
                 "{case}", "{mb}", "{power}", "{cpucooler}" };
 
-            //если объявления ещё не генерились, то генерим
-            if (Comp.Ads.Count == 0)
-            {
-                Ad ad = new Ad() { Title = Comp.Title, Description = Comp.Description };
-
-                Ads_.Add(ad);
-
-                foreach (string temp in partsTemplates)
+                //если объявления ещё не генерились, то генерим
+                if (Comp.Ads.Count == 0)
                 {
-                    CacheAds_ = new ObservableCollection<Ad>();
-                    foreach (Ad ad_ in Ads_)
+                    Ad ad = new Ad() { Title = Comp.Title, Description = Comp.Description };
+
+                    Ads_.Add(ad);
+
+                    foreach (string temp in partsTemplates)
                     {
-                        ObservableCollection<IProduct> parts = GetParts(temp, Comp);
-                        foreach (IProduct pr in parts)
+                        CacheAds_ = new ObservableCollection<Ad>();
+                        foreach (Ad ad_ in Ads_)
                         {
-                            decimal price = ad_.Price + pr.Price;
-                            string desc = ad_.Description.Replace(temp, pr.ToString());
-                            string title = ad_.Title.Replace(temp, pr.ToString());
-                            Ad newAd = new Ad() { Description = desc, Title = title, Price = price };
+                            ObservableCollection<IProduct> parts = GetParts(temp, Comp);
+                            foreach (IProduct pr in parts)
+                            {
+                                decimal price = ad_.Price + pr.Price;
+                                string desc = ad_.Description.Replace(temp, pr.ToString());
+                                string title = ad_.Title.Replace(temp, pr.ToString());
+                                Ad newAd = new Ad() { Description = desc, Title = title, Price = price };
 
-                            foreach (string oldPart in ad_.Guids)
-                                newAd.Guids.Add(oldPart);
-                            newAd.Guids.Add(pr.Guid);
+                                foreach (string oldPart in ad_.Guids)
+                                    newAd.Guids.Add(oldPart);
+                                newAd.Guids.Add(pr.Guid);
 
-                            CacheAds_.Add(newAd);
+                                CacheAds_.Add(newAd);
+                            }
+                        }
+                        Ads_ = (CacheAds_.Count > 0) ? CacheAds_ : Ads_;
+                    }
+
+                    //добавляем фото
+                    if (Comp.ImagesPath.Count > 0)
+                    {
+                        int imageIndex = 0;
+                        for (int i = 0; i < Ads_.Count; i++)
+                        {
+                            if (imageIndex == Comp.ImagesPath.Count) imageIndex = 0;
+                            Ads_[i].ImgFileName = Comp.ImagesPath[imageIndex].Path;
+                            Ads_[i].IconFileName = Comp.ImagesPath[imageIndex].IconPath;
+                            imageIndex++;
                         }
                     }
-                    Ads_ = (CacheAds_.Count > 0) ? CacheAds_ : Ads_;
-                }
 
-                //добавляем фото
-                if(Comp.ImagesPath.Count > 0)
-                {
-                    int imageIndex = 0;
+
                     for (int i = 0; i < Ads_.Count; i++)
                     {
-                        if (imageIndex == Comp.ImagesPath.Count) imageIndex = 0;
-                        Ads_[i].ImgFileName = Comp.ImagesPath[imageIndex].Path;
-                        Ads_[i].IconFileName = Comp.ImagesPath[imageIndex].IconPath;
-                        imageIndex++;
+
+                        Ads_[i].Description = Randomizator.ParseSpintax(Ads_[i].Description);
+                        Ads_[i].Title = Randomizator.ParseSpintax(Ads_[i].Title);
+
+
                     }
+
+                    Comp.Ads = Ads_;
                 }
-                
+                Ads_ = Comp.Ads;
+                adsDataGrid.ItemsSource = Comp.Ads;
+                adsDataGrid.Items.Refresh();
 
-                for (int i = 0; i < Ads_.Count; i++)
-                {
+                videoComboBox.ItemsSource = Comp.VideoAdapters;
+                memoryComboBox.ItemsSource = Comp.Memories;
+                hddComboBox.ItemsSource = Comp.HDDs;
+                ssdComboBox.ItemsSource = Comp.SSDs;
+                cpuComboBox.ItemsSource = Comp.Processors;
 
-                    Ads_[i].Description = Randomizator.ParseSpintax(Ads_[i].Description);
-                    Ads_[i].Title = Randomizator.ParseSpintax(Ads_[i].Title);
-
-
-                }
-
-                Comp.Ads = Ads_;
+                adsCountLabel.Content = Comp.Ads.Count.ToString();
+                filteredAdsCountLabel.Content = Comp.Ads.Count.ToString();
             }
-            Ads_ = Comp.Ads;
-            adsDataGrid.ItemsSource = Comp.Ads;
-            adsDataGrid.Items.Refresh();
+            else
+            {
+                Ads_ = global.AdsArchive;
+                adsDataGrid.ItemsSource = global.AdsArchive;
+                adsDataGrid.Items.Refresh();
 
-            videoComboBox.ItemsSource = Comp.VideoAdapters;
-            memoryComboBox.ItemsSource = Comp.Memories;
-            hddComboBox.ItemsSource = Comp.HDDs;
-            ssdComboBox.ItemsSource = Comp.SSDs;
+                videoComboBox.ItemsSource = global.VideoAdapters;
+                memoryComboBox.ItemsSource = global.MemoryOptions;
+                hddComboBox.ItemsSource = global.HDDOptions;
+                ssdComboBox.ItemsSource = global.SSDOptions;
+                cpuComboBox.ItemsSource = global.ProcessorOptions;
 
-            adsCountLabel.Content = Comp.Ads.Count.ToString();
-            filteredAdsCountLabel.Content = Comp.Ads.Count.ToString();
+                adsCountLabel.Content = global.AdsArchive.Count.ToString();
+                filteredAdsCountLabel.Content = global.AdsArchive.Count.ToString();
+            }
         }
 
         private ObservableCollection<IProduct> GetParts(string temp, Computer comp)
@@ -253,18 +278,36 @@ namespace AdMakerM.Views
             SSD selectedSSD = (SSD)(ssdComboBox).SelectedItem;
             if (selectedSSD != null) selectedGuids.Add(selectedSSD.Guid);
 
+            Processor selectedCPU = (Processor)(cpuComboBox).SelectedItem;
+            if (selectedCPU != null) selectedGuids.Add(selectedCPU.Guid);
+
             RefreshDataGrid(selectedGuids);
         }
 
         private void RefreshDataGrid(StringCollection selectedGuids)
         {
-            if(selectedGuids.Count==0)
+            if (selectedGuids.Count == 0)
             {
-                adsDataGrid.ItemsSource = Comp.Ads;
+
+                ObservableCollection<Ad> tempAds = new ObservableCollection<Ad>(Ads_);
+                if (MaxPriceFilter > 0)
+                    tempAds = new ObservableCollection<Ad>(tempAds.Where(ad => ad.BuyPrice <= MaxPriceFilter));
+                if (MinPriceFilter > 0)
+                    tempAds = new ObservableCollection<Ad>(tempAds.Where(ad => ad.BuyPrice >= MinPriceFilter));
+                if (MaxCostPriceFilter > 0)
+                    tempAds = new ObservableCollection<Ad>(tempAds.Where(ad => ad.Price <= MaxCostPriceFilter));
+                if (MinCostPriceFilter > 0)
+                    tempAds = new ObservableCollection<Ad>(tempAds.Where(ad => ad.Price >= MinCostPriceFilter));
+                adsDataGrid.ItemsSource = tempAds;
             }
             else
             {
-                ObservableCollection<Ad> filteredAds = new ObservableCollection<Ad>(Comp.Ads);
+                ObservableCollection<Ad> filteredAds;
+                if (Comp != null)
+                    filteredAds = new ObservableCollection<Ad>(Comp.Ads);
+                else
+                    filteredAds = new ObservableCollection<Ad>(global.AdsArchive);
+
                 foreach (string guid in selectedGuids)
                 {
                     filteredAds = new ObservableCollection<Ad>(filteredAds.Where(ad => ad.Guids.Contains(guid)));
@@ -281,8 +324,14 @@ namespace AdMakerM.Views
             memoryComboBox.SelectedItem = null;
             hddComboBox.SelectedItem = null;
             ssdComboBox.SelectedItem = null;
+            cpuComboBox.SelectedItem = null;
             adsDataGrid.ItemsSource = Comp.Ads;
             filteredAdsCountLabel.Content = adsDataGrid.Items.Count.ToString();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VideoComboBox_SelectionChanged(null, null);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace AdMakerM
         public ObservableCollection<ProcessorCooler> CPUCoolerOptions { get; set; } = new ObservableCollection<ProcessorCooler>();
         public ObservableCollection<PowerSupply> PowerOptions { get; set; } = new ObservableCollection<PowerSupply>();
 
-        
+        public ObservableCollection<Ad> AdsArchive { get; set; } = new ObservableCollection<Ad>();
 
 
         //Для сериализации пустой конструктор
@@ -49,6 +49,7 @@ namespace AdMakerM
             CPUCoolerOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             PowerOptions.CollectionChanged += VideoAdapters_CollectionChanged;
             Comps.CollectionChanged+= VideoAdapters_CollectionChanged;
+            AdsArchive.CollectionChanged += VideoAdapters_CollectionChanged;
         }
 
         internal void FindArt(int art)
@@ -73,6 +74,12 @@ namespace AdMakerM
             Computer comp = Comps.Where(c => c.Guid == guid).FirstOrDefault();
 
             Views.Ads f = new Views.Ads(this, comp);
+            f.ShowDialog();
+        }
+
+        internal void ShowAds()
+        {
+            Views.Ads f = new Views.Ads(this, null);
             f.ShowDialog();
         }
 
@@ -107,6 +114,7 @@ namespace AdMakerM
                 {
                     var gl = (Global)formatterGlobal.Deserialize(fs);
                     Comps = gl.Comps;
+                    AdsArchive = gl.AdsArchive;
                     VideoAdapters = gl.VideoAdapters;
                     MemoryOptions = gl.MemoryOptions;
                     SSDOptions = gl.SSDOptions;

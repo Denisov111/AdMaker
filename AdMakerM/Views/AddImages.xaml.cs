@@ -87,7 +87,7 @@ namespace AdMakerM.Views
                 string newIconPath = System.IO.Path.Combine(currentDir, newFileName);
                 if (!File.Exists(newIconPath))
                 {
-                    await ImageEditor.EditImage(origFilePath, newIconPath, 100);
+                    await ImageEditor.EditImage(origFilePath, newIconPath, 30);
                 }
                 adImage.IconPath = newIconPath;
 

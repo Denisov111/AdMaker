@@ -143,6 +143,8 @@ namespace AdMakerM.Views
         private void Button_Click_6(object sender, RoutedEventArgs e)
         {
             PubOnYoula();
+            gl.AdsArchive.Add(Ad);
+            gl.SaveAll();
         }
 
         private void PubOnYoula()
