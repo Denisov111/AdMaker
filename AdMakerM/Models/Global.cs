@@ -63,9 +63,21 @@ namespace AdMakerM
                     try
                     {
                         f.ShowDialog();
+                        return;
                     }
                     catch { }
                 }
+            }
+
+            Ad publishedAd = AdsArchive.Where(a => a.Articul == art).FirstOrDefault();
+            if (publishedAd != null)
+            {
+                Views.AdCard f = new Views.AdCard(publishedAd, this);
+                try
+                {
+                    f.ShowDialog();
+                }
+                catch { }
             }
         }
 

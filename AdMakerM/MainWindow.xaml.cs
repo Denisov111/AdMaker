@@ -56,7 +56,6 @@ namespace AdMakerM
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            
             int art = int.Parse(findArticulTextBox.Text);
             global.FindArt(art);
         }
