@@ -30,13 +30,14 @@
         </DataGrid>
 
         <StackPanel HorizontalAlignment="Left" Height="177" Margin="10,580,0,0" VerticalAlignment="Top" Width="513">
-            
 
-            
-            
+
+
+            <CheckBox IsChecked="{Binding Local.IsMakeIcons}" Content="создавать иконки для фото"/>
             <Button Content="Добавить фото" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click"/>
             <Button Content="Добавить папку с фото" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_2"/>
             <Button Content="Добавить фото в опции сборки" HorizontalAlignment="Left" VerticalAlignment="Top" Width="234" Click="Button_Click_1" />
+            
         </StackPanel>
     </Grid>
 </Window>

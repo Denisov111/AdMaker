@@ -26,6 +26,7 @@ namespace AdMakerM.Views
         Computer comp;
 
         public ObservableCollection<AdImage> Images { get; set; } = new ObservableCollection<AdImage>();
+        public bool IsMakeIcons { get; set; }
 
         public AddImages(Global global, Computer comp)
         {
@@ -74,23 +75,24 @@ namespace AdMakerM.Views
             AdImage adImage = new AdImage() { Path = origFilePath };
             try
             {
-
-                //создаём иконки, если надо
                 string currentDir = Directory.GetCurrentDirectory();
                 string origFileName = System.IO.Path.GetFileName(origFilePath);
 
-                if (!Directory.Exists("icons"))
+                //создаём иконки, если надо
+                if (IsMakeIcons)
                 {
-                    Directory.CreateDirectory("icons");
+                    if (!Directory.Exists("icons"))
+                    {
+                        Directory.CreateDirectory("icons");
+                    }
+                    string newFileName = "icons\\icon_" + origFileName;
+                    string newIconPath = System.IO.Path.Combine(currentDir, newFileName);
+                    if (!File.Exists(newIconPath))
+                    {
+                        await ImageEditor.EditImage(origFilePath, newIconPath, 30);
+                    }
+                    adImage.IconPath = newIconPath;
                 }
-                string newFileName = "icons\\icon_" + origFileName;
-                string newIconPath = System.IO.Path.Combine(currentDir, newFileName);
-                if (!File.Exists(newIconPath))
-                {
-                    await ImageEditor.EditImage(origFilePath, newIconPath, 30);
-                }
-                adImage.IconPath = newIconPath;
-
 
                 //создаём копии, если ещё нет таких копий
                 if (!Directory.Exists("copies"))
