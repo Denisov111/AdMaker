@@ -21,13 +21,13 @@ namespace AdMakerM
     /// </summary>
     public partial class MainWindow : Window
     {
-        Global global;
-
+        Global global; 
         
 
         public MainWindow()
         {
             InitializeComponent();
+            Console.Write(444);
 
             global = new Global(null);
             DataContext = global;
